@@ -37,8 +37,8 @@ To develop a web application that allows users to manage their daily expenses, o
 - [x] Login interface
 - [x] Registration interface
 - [x] Client-side form validation
-- [ ] User authentication with Supabase
-- [ ] Secure session management
+- [x] User authentication with Supabase
+- [x] Secure session management
 - [ ] Password recovery
 
 ### Expense Management
