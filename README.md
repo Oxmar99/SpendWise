@@ -98,6 +98,20 @@ SpendWise/
 > The project structure may evolve as backend services, database integration, and additional application modules are implemented.
 
 ---
+## Supabase
+
+SpendWise uses Supabase for user authentication.
+
+The application uses Supabase Authentication to:
+
+- Register new users
+- Authenticate existing users
+- Store user accounts
+- Manage user sessions
+
+The Supabase project is managed separately from this repository.
+
+---
 
 ## 🧩 Object-Oriented Programming
 
