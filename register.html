@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendWise | Create Account</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <main class="register-container">
+
+        <!-- Left section -->
+        <section class="register-welcome-section">
+
+            <div class="brand">
+                <div class="brand-icon">$</div>
+                <h1>SpendWise</h1>
+            </div>
+
+            <div class="register-welcome-content">
+                <p class="small-label">START YOUR JOURNEY</p>
+
+                <h2>
+                    Build better
+                    <span>spending habits.</span>
+                </h2>
+
+                <p class="welcome-text">
+                    Create your account and start organizing
+                    your daily expenses with clarity.
+                </p>
+
+                <div class="benefits-list">
+
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Track your daily expenses</span>
+                    </div>
+
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Organize spending by category</span>
+                    </div>
+
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Monitor your personal budget</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <p class="copyright">
+                © 2026 SpendWise. All rights reserved.
+            </p>
+
+        </section>
+
+
+        <!-- Right section -->
+        <section class="register-form-section">
+
+            <div class="register-form-wrapper">
+
+                <div class="mobile-brand">
+                    <div class="brand-icon">$</div>
+                    <h1>SpendWise</h1>
+                </div>
+
+                <div class="form-header">
+                    <p class="form-label">GET STARTED</p>
+                    <h2>Create your account</h2>
+                    <p>Fill in your details to get started.</p>
+                </div>
+
+                <form id="registerForm" novalidate>
+
+                    <div class="input-group">
+                        <label for="fullName">Full name</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">♙</span>
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                name="fullName"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                            >
+                        </div>
+
+                        <small class="error-message" id="nameError"></small>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="registerEmail">Email address</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">✉</span>
+
+                            <input
+                                type="email"
+                                id="registerEmail"
+                                name="registerEmail"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                            >
+                        </div>
+
+                        <small class="error-message" id="registerEmailError"></small>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="registerPassword">Password</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">⌑</span>
+
+                            <input
+                                type="password"
+                                id="registerPassword"
+                                name="registerPassword"
+                                placeholder="Create a password"
+                                autocomplete="new-password"
+                            >
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                id="toggleRegisterPassword"
+                                aria-label="Show password"
+                            >
+                                Show
+                            </button>
+                        </div>
+
+                        <small class="error-message" id="registerPasswordError"></small>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="confirmPassword">Confirm password</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">⌑</span>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                placeholder="Repeat your password"
+                                autocomplete="new-password"
+                            >
+                        </div>
+
+                        <small class="error-message" id="confirmPasswordError"></small>
+                    </div>
+
+
+                    <button type="submit" class="login-button register-button">
+                        <span>Create Account</span>
+                        <span class="button-arrow">→</span>
+                    </button>
+
+                    <p class="form-message" id="registerFormMessage"></p>
+
+                </form>
+
+                <p class="signup-text">
+                    Already have an account?
+                    <a href="index.html" class="signup-link">Sign in</a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,678 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
+:root {
+    --primary: #1f6f5c;
+    --primary-dark: #185747;
+    --primary-light: #e8f3ef;
+    --background: #f5f7f6;
+    --white: #ffffff;
+    --text-dark: #17221f;
+    --text-medium: #63716c;
+    --text-light: #8b9792;
+    --border: #dfe6e2;
+    --error: #c94b4b;
+    --shadow: 0 20px 60px rgba(26, 55, 45, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--background);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================
+   LEFT SECTION
+========================= */
+
+.welcome-section {
+    width: 50%;
+    background: var(--primary);
+    color: var(--white);
+    padding: 42px 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-section::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    right: -180px;
+    top: -120px;
+}
+
+.welcome-section::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+    left: -180px;
+    bottom: -150px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Manrope', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.brand h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+.welcome-content {
+    max-width: 470px;
+    position: relative;
+    z-index: 1;
+    margin: 40px 0;
+}
+
+.small-label,
+.form-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.small-label {
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 22px;
+}
+
+.welcome-content h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(34px, 3.5vw, 52px);
+    line-height: 1.12;
+    letter-spacing: -2px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.welcome-content h2 span {
+    display: block;
+    color: #a9ddc8;
+}
+
+.welcome-text {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 340px;
+}
+
+/* =========================
+   DECORATIVE CHART
+========================= */
+
+.finance-decoration {
+    margin-top: 50px;
+}
+
+.chart-card {
+    width: 100%;
+    max-width: 370px;
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 22px;
+}
+
+.chart-percentage {
+    color: #a9ddc8;
+    font-weight: 700;
+}
+
+.chart-bars {
+    height: 105px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 5px;
+}
+
+.bar {
+    flex: 1;
+    background: #a9ddc8;
+    border-radius: 5px 5px 2px 2px;
+    opacity: 0.85;
+}
+
+.bar-1 { height: 35%; }
+.bar-2 { height: 52%; }
+.bar-3 { height: 42%; }
+.bar-4 { height: 68%; }
+.bar-5 { height: 55%; }
+.bar-6 { height: 82%; }
+.bar-7 { height: 100%; }
+
+.chart-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.copyright {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    position: relative;
+    z-index: 1;
+}
+
+/* =========================
+   RIGHT SECTION
+========================= */
+
+.form-section {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: var(--background);
+}
+
+.form-wrapper {
+    width: 100%;
+    max-width: 430px;
+}
+
+.mobile-brand {
+    display: none;
+}
+
+.form-header {
+    margin-bottom: 36px;
+}
+
+.form-label {
+    color: var(--primary);
+    margin-bottom: 14px;
+}
+
+.form-header h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    margin-bottom: 10px;
+}
+
+.form-header p:last-child {
+    color: var(--text-medium);
+    font-size: 14px;
+}
+
+/* =========================
+   FORM INPUTS
+========================= */
+
+.input-group {
+    margin-bottom: 24px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 9px;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgot-link,
+.signup-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.forgot-link {
+    font-size: 12px;
+}
+
+.forgot-link:hover,
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    color: var(--text-light);
+    font-size: 17px;
+    pointer-events: none;
+}
+
+.input-wrapper input {
+    width: 100%;
+    height: 52px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--white);
+    padding: 0 16px 0 45px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-dark);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-wrapper input::placeholder {
+    color: #aab4af;
+}
+
+.input-wrapper input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(31, 111, 92, 0.1);
+}
+
+.input-wrapper input.input-error {
+    border-color: var(--error);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 14px;
+    border: none;
+    background: none;
+    color: var(--primary);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.error-message {
+    display: block;
+    color: var(--error);
+    font-size: 11px;
+    margin-top: 6px;
+    min-height: 14px;
+}
+
+/* =========================
+   REMEMBER + BUTTON
+========================= */
+
+.remember-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0 28px;
+}
+
+.checkbox-label {
+    display: flex !important;
+    align-items: center;
+    gap: 9px;
+    cursor: pointer;
+    color: var(--text-medium);
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    margin-bottom: 0 !important;
+}
+
+.checkbox-label input {
+    accent-color: var(--primary);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.login-button {
+    width: 100%;
+    height: 54px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.login-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(31, 111, 92, 0.18);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.button-arrow {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.form-message {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 16px;
+    min-height: 16px;
+}
+
+.form-message.success {
+    color: var(--primary);
+}
+
+.form-message.error {
+    color: var(--error);
+}
+
+.signup-text {
+    text-align: center;
+    color: var(--text-medium);
+    font-size: 13px;
+    margin-top: 30px;
+}
+
+.signup-link {
+    margin-left: 4px;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 900px) {
+    .welcome-section {
+        padding: 35px 5%;
+    }
+
+    .form-section {
+        padding: 30px;
+    }
+
+    .welcome-content h2 {
+        font-size: 36px;
+    }
+
+    .chart-card {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 700px) {
+    .login-container {
+        display: block;
+    }
+
+    .welcome-section {
+        display: none;
+    }
+
+    .form-section {
+        width: 100%;
+        min-height: 100vh;
+        padding: 30px 24px;
+    }
+
+    .form-wrapper {
+        max-width: 430px;
+    }
+
+    .mobile-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 55px;
+    }
+
+    .mobile-brand .brand-icon {
+        background: var(--primary-light);
+        border-color: transparent;
+        color: var(--primary);
+    }
+
+    .mobile-brand h1 {
+        font-family: 'Manrope', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.8px;
+    }
+
+    .form-header h2 {
+        font-size: 27px;
+    }
+}
+
+/* =========================
+   REGISTER PAGE
+========================= */
+
+.register-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.register-welcome-section {
+    width: 50%;
+    background: var(--primary);
+    color: var(--white);
+    padding: 42px 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.register-welcome-section::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    right: -180px;
+    top: -120px;
+}
+
+.register-welcome-section::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+    left: -180px;
+    bottom: -150px;
+}
+
+.register-welcome-content {
+    max-width: 470px;
+    position: relative;
+    z-index: 1;
+    margin: 40px 0;
+}
+
+.register-welcome-content h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(34px, 3.5vw, 52px);
+    line-height: 1.12;
+    letter-spacing: -2px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.register-welcome-content h2 span {
+    display: block;
+    color: #a9ddc8;
+}
+
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 42px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 13px;
+}
+
+.benefit-icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgba(169, 221, 200, 0.15);
+    border: 1px solid rgba(169, 221, 200, 0.3);
+    color: #a9ddc8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.register-form-section {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: var(--background);
+}
+
+.register-form-wrapper {
+    width: 100%;
+    max-width: 430px;
+}
+
+.register-button {
+    margin-top: 4px;
+}
+
+/* =========================
+   REGISTER RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+    .register-welcome-section {
+        padding: 35px 5%;
+    }
+
+    .register-form-section {
+        padding: 30px;
+    }
+
+    .register-welcome-content h2 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 700px) {
+    .register-container {
+        display: block;
+    }
+
+    .register-welcome-section {
+        display: none;
+    }
+
+    .register-form-section {
+        width: 100%;
+        min-height: 100vh;
+        padding: 30px 24px;
+    }
+
+    .register-form-wrapper {
+        max-width: 430px;
+    }
+
+    .register-form-wrapper .mobile-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 45px;
+    }
+
+    .register-form-wrapper .mobile-brand .brand-icon {
+        background: var(--primary-light);
+        border-color: transparent;
+        color: var(--primary);
+    }
+
+    .register-form-wrapper .mobile-brand h1 {
+        font-family: 'Manrope', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.8px;
+    }
+}

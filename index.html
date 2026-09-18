@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendWise | Login</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <main class="login-container">
+
+        <!-- Left section -->
+        <section class="welcome-section">
+            <div class="brand">
+                <div class="brand-icon">$</div>
+                <h1>SpendWise</h1>
+            </div>
+
+            <div class="welcome-content">
+                <p class="small-label">PERSONAL FINANCE</p>
+
+                <h2>
+                    Take control of
+                    <span>your expenses.</span>
+                </h2>
+
+                <p class="welcome-text">
+                    Track your daily spending, manage your budget,
+                    and make smarter financial decisions.
+                </p>
+
+                <div class="finance-decoration">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span>Monthly spending</span>
+                            <span class="chart-percentage">+12.5%</span>
+                        </div>
+
+                        <div class="chart-bars">
+                            <div class="bar bar-1"></div>
+                            <div class="bar bar-2"></div>
+                            <div class="bar bar-3"></div>
+                            <div class="bar bar-4"></div>
+                            <div class="bar bar-5"></div>
+                            <div class="bar bar-6"></div>
+                            <div class="bar bar-7"></div>
+                        </div>
+
+                        <div class="chart-footer">
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                            <span>Sun</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="copyright">© 2026 SpendWise. All rights reserved.</p>
+        </section>
+
+
+        <!-- Right section -->
+        <section class="form-section">
+
+            <div class="form-wrapper">
+
+                <div class="mobile-brand">
+                    <div class="brand-icon">$</div>
+                    <h1>SpendWise</h1>
+                </div>
+
+                <div class="form-header">
+                    <p class="form-label">WELCOME BACK</p>
+                    <h2>Sign in to your account</h2>
+                    <p>Enter your details to continue.</p>
+                </div>
+
+                <form id="loginForm" novalidate>
+
+                    <div class="input-group">
+                        <label for="email">Email address</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">✉</span>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                            >
+                        </div>
+
+                        <small class="error-message" id="emailError"></small>
+                    </div>
+
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="password">Password</label>
+                            <a href="#" class="forgot-link">Forgot password?</a>
+                        </div>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">⌑</span>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                            >
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                id="togglePassword"
+                                aria-label="Show password"
+                            >
+                                Show
+                            </button>
+                        </div>
+
+                        <small class="error-message" id="passwordError"></small>
+                    </div>
+
+
+                    <div class="remember-row">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                    </div>
+
+
+                    <button type="submit" class="login-button">
+                        <span>Sign In</span>
+                        <span class="button-arrow">→</span>
+                    </button>
+
+                    <p class="form-message" id="formMessage"></p>
+
+                </form>
+
+                <p class="signup-text">
+                    Don't have an account?
+                    <a href="register.html" class="signup-link">Create an account</a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
