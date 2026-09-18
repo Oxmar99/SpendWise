@@ -1,3 +1,12 @@
+const supabaseUrl = "https://yjxasolblerhegkvtubo.supabase.co";
+const supabaseKey = "sb_publishable_fHDwlWNuerfj8H6ihMRTPg_sE4BEHYj";
+
+const supabaseClient = window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+console.log("Supabase:", supabase);
+
 class RegisterForm {
     constructor(form) {
         this.form = form;
@@ -170,7 +179,7 @@ class RegisterForm {
         );
     }
 
-    handleSubmit() {
+    async handleSubmit() {
         const isNameValid = this.validateName();
         const isEmailValid = this.validateEmail();
         const isPasswordValid = this.validatePassword();
@@ -181,15 +190,41 @@ class RegisterForm {
             !isEmailValid ||
             !isPasswordValid ||
             !isConfirmPasswordValid
-        ) {
-            this.formMessage.textContent = "";
+     ) {
+         this.formMessage.textContent = "";
+           return;
+        }
+
+        const name = this.nameInput.value.trim();
+        const email = this.emailInput.value.trim();
+        const password = this.passwordInput.value;
+
+        this.formMessage.textContent = "Creating your account...";
+        this.formMessage.className = "form-message";
+
+        const { data, error } = await supabaseClient.auth.signUp({
+          email: email,
+         password: password,
+         options: {
+             data: {
+                 full_name: name
+            }
+         }
+    });
+
+        if (error) {
+           this.formMessage.textContent = error.message;
+            this.formMessage.className = "form-message error";
             return;
         }
 
-        this.formMessage.textContent =
-            "Form validated successfully. Account creation will be connected later.";
+        console.log("Registered user:", data.user);
 
+        this.formMessage.textContent =
+            "Account created successfully!";
         this.formMessage.className = "form-message success";
+
+        this.form.reset();
     }
 }
 
