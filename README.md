@@ -42,12 +42,12 @@ To develop a web application that allows users to manage their daily expenses, o
 - [ ] Password recovery
 
 ### Expense Management
-- [ ] Create expenses
-- [ ] View expense history
-- [ ] Update expenses
-- [ ] Delete expenses
-- [ ] Assign categories to expenses
-- [ ] Filter expenses by date or category
+- [x] Create expenses
+- [x] View expense history
+- [x] Update expenses
+- [x] Delete expenses
+- [x] Assign categories to expenses
+- [x] Filter expenses by date or category
 
 ### Budget Management
 - [ ] Create personal budgets
