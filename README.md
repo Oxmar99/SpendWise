@@ -57,8 +57,8 @@ To develop a web application that allows users to manage their daily expenses, o
 - [ ] Budget notifications
 
 ### Dashboard and Reports
-- [ ] Display total expenses
-- [ ] Display expenses by category
+- [x] Display total expenses
+- [x] Display expenses by category
 - [ ] Generate monthly summaries
 - [ ] Add spending charts
 - [ ] Identify spending patterns
