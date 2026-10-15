@@ -21,7 +21,11 @@ The current version includes the initial authentication interfaces:
 - Responsive user interface
 - Initial object-oriented JavaScript structure
 
-> **Note:** Backend authentication, database integration, and Supabase services have not been implemented yet. They will be developed in future stages.
+Current stage: dashboard development and expense management.
+
+The application already includes user registration and login connected to Supabase, a configured database, and operations to create, view, edit, and delete expenses. Search and filtering functionality is also being integrated.
+
+> **Note:** The next objective is to complete the filter tests and develop the statistics and charts that will allow for the analysis of recorded expenses.
 
 ---
 
