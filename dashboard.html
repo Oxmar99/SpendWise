@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendWise | Panel principal</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <div>
+                <h1>SpendWise</h1>
+                <p id="welcomeMessage">¡Bienvenido!</p>
+            </div>
+            <button id="logoutButton" type="button">
+                Cerrar sesión
+            </button>
+        </header>
+
+        <section class="expense-summary">
+            <h2>Resumen de gastos</h2>
+            <p>Total registrado</p>
+            <h3 id="totalExpenses">$0.00</h3>
+        </section>
+
+        <section class="expense-form-section">
+            <h2>Registrar un gasto</h2>
+
+            <form id="expenseForm">
+                <label for="description">Descripción</label>
+                <input
+                    type="text"
+                    id="description"
+                    maxlength="100"
+                    placeholder="Ej. Café, transporte..."
+                    required
+                >
+
+                <input type="hidden" id="editingExpenseId">
+
+                <button
+                    type="button"
+                    id="cancelEditButton"
+                    hidden
+                >
+                    Cancelar edición
+                </button>
+
+                <label for="amount">Monto (MXN)</label>
+                <input
+                    type="number"
+                    id="amount"
+                    min="0.01"
+                    max="999999999"
+                    step="0.01"
+                    placeholder="Ej. 45.50"
+                    required
+                >
+
+                <label for="category">Categoría</label>
+                <select id="category" required>
+                    <option value="">Cargando categorías...</option>
+                </select>
+
+                <label for="expenseDate">Fecha del gasto</label>
+                <input
+                    type="date"
+                    id="expenseDate"
+                    required
+                >
+
+                <button type="submit" id="saveExpenseButton">
+                    Guardar gasto
+                </button>
+
+                <p id="formMessage" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <section class="expense-list-section">
+            <h2>Mis últimos gastos</h2>
+            <div class="expense-filters">
+                <label for="searchExpense">Buscar gasto</label>
+                <input
+                    type="search"
+                    id="searchExpense"
+                    placeholder="Ej. Café, transporte..."
+                >
+
+                <label for="filterCategory">Categoría</label>
+                <select id="filterCategory">
+                    <option value="">Todas las categorías</option>
+                </select>
+
+                <label for="startDate">Desde</label>
+                <input type="date" id="startDate">
+
+                <label for="endDate">Hasta</label>
+                <input type="date" id="endDate">
+
+                <button type="button" id="clearFiltersButton">
+                    Limpiar filtros
+                </button>
+            </div>
+
+            <div id="expensesList">
+                <p>Cargando movimientos...</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

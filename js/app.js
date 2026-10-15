@@ -145,7 +145,7 @@ class LoginForm {
 
         console.log("Logged in user:", data.user);
 
-        // Later we will redirect to the main SpendWise application.
+        window.location.href = "dashboard.html";
     }
 }
 
