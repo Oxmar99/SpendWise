@@ -220,17 +220,17 @@ docs: update project README
 - [x] Organize initial project structure
 
 ### Phase 2: Backend and Database
-- [ ] Create Supabase project
-- [ ] Design database schema
-- [ ] Configure Supabase authentication
-- [ ] Connect JavaScript application to Supabase
-- [ ] Implement user registration and login
+- [x] Create Supabase project
+- [x] Design database schema
+- [x] Configure Supabase authentication
+- [x] Connect JavaScript application to Supabase
+- [x] Implement user registration and login
 
 ### Phase 3: Expense Management
-- [ ] Create expense database table
-- [ ] Implement expense CRUD operations
-- [ ] Add expense categories
-- [ ] Connect expense forms to Supabase
+- [x] Create expense database table
+- [x] Implement expense CRUD operations
+- [x] Add expense categories
+- [x] Connect expense forms to Supabase
 
 ### Phase 4: Budgets and Dashboard
 - [ ] Implement budget management
