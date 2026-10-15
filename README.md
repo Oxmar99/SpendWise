@@ -85,6 +85,7 @@ SpendWise/
 │
 ├── index.html              # Login page
 ├── register.html           # Registration page
+├── dashboard.html          # Main panel to manage expenses.
 ├── README.md               # Project documentation
 │
 ├── css/
@@ -92,7 +93,8 @@ SpendWise/
 │
 └── js/
     ├── app.js              # Login form logic and validation
-    └── register.js         # Registration form logic and validation
+    ├── register.js         # Registration form logic and validation
+    └── dashboard.js        # Expense transactions, categories, filters, and session.
 ```
 
 > The project structure may evolve as backend services, database integration, and additional application modules are implemented.
