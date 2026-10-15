@@ -37,8 +37,8 @@ To develop a web application that allows users to manage their daily expenses, o
 - [x] Login interface
 - [x] Registration interface
 - [x] Client-side form validation
-- [ ] User authentication with Supabase
-- [ ] Secure session management
+- [x] User authentication with Supabase
+- [x] Secure session management
 - [ ] Password recovery
 
 ### Expense Management
@@ -96,6 +96,20 @@ SpendWise/
 ```
 
 > The project structure may evolve as backend services, database integration, and additional application modules are implemented.
+
+---
+## Supabase
+
+SpendWise uses Supabase for user authentication.
+
+The application uses Supabase Authentication to:
+
+- Register new users
+- Authenticate existing users
+- Store user accounts
+- Manage user sessions
+
+The Supabase project is managed separately from this repository.
 
 ---
 
