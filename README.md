@@ -21,7 +21,11 @@ The current version includes the initial authentication interfaces:
 - Responsive user interface
 - Initial object-oriented JavaScript structure
 
-> **Note:** Backend authentication, database integration, and Supabase services have not been implemented yet. They will be developed in future stages.
+Current stage: dashboard development and expense management.
+
+The application already includes user registration and login connected to Supabase, a configured database, and operations to create, view, edit, and delete expenses. Search and filtering functionality is also being integrated.
+
+> **Note:** The next objective is to complete the filter tests and develop the statistics and charts that will allow for the analysis of recorded expenses.
 
 ---
 
@@ -42,26 +46,26 @@ To develop a web application that allows users to manage their daily expenses, o
 - [ ] Password recovery
 
 ### Expense Management
-- [ ] Create expenses
-- [ ] View expense history
-- [ ] Update expenses
-- [ ] Delete expenses
-- [ ] Assign categories to expenses
-- [ ] Filter expenses by date or category
+- [x] Create expenses
+- [x] View expense history
+- [x] Update expenses
+- [x] Delete expenses
+- [x] Assign categories to expenses
+- [x] Filter expenses by date or category
 
 ### Budget Management
-- [ ] Create personal budgets
-- [ ] Set spending limits
-- [ ] Monitor budget progress
-- [ ] Display remaining budget
-- [ ] Budget notifications
+- [x] Create personal budgets
+- [x] Set spending limits
+- [x] Monitor budget progress
+- [x] Display remaining budget
+- [x] Budget notifications
 
 ### Dashboard and Reports
-- [ ] Display total expenses
-- [ ] Display expenses by category
-- [ ] Generate monthly summaries
-- [ ] Add spending charts
-- [ ] Identify spending patterns
+- [x] Display total expenses
+- [x] Display expenses by category
+- [x] Generate monthly summaries
+- [x] Add spending charts
+- [x] Identify spending patterns
 
 ---
 
@@ -85,6 +89,7 @@ SpendWise/
 │
 ├── index.html              # Login page
 ├── register.html           # Registration page
+├── dashboard.html          # Main panel to manage expenses.
 ├── README.md               # Project documentation
 │
 ├── css/
@@ -92,7 +97,8 @@ SpendWise/
 │
 └── js/
     ├── app.js              # Login form logic and validation
-    └── register.js         # Registration form logic and validation
+    ├── register.js         # Registration form logic and validation
+    └── dashboard.js        # Expense transactions, categories, filters, and session.
 ```
 
 > The project structure may evolve as backend services, database integration, and additional application modules are implemented.
@@ -220,26 +226,26 @@ docs: update project README
 - [x] Organize initial project structure
 
 ### Phase 2: Backend and Database
-- [ ] Create Supabase project
-- [ ] Design database schema
-- [ ] Configure Supabase authentication
-- [ ] Connect JavaScript application to Supabase
-- [ ] Implement user registration and login
+- [x] Create Supabase project
+- [x] Design database schema
+- [x] Configure Supabase authentication
+- [x] Connect JavaScript application to Supabase
+- [x] Implement user registration and login
 
 ### Phase 3: Expense Management
-- [ ] Create expense database table
-- [ ] Implement expense CRUD operations
-- [ ] Add expense categories
-- [ ] Connect expense forms to Supabase
+- [x] Create expense database table
+- [x] Implement expense CRUD operations
+- [x] Add expense categories
+- [x] Connect expense forms to Supabase
 
 ### Phase 4: Budgets and Dashboard
-- [ ] Implement budget management
-- [ ] Create dashboard
-- [ ] Add expense summaries
-- [ ] Add charts and reports
+- [x] Implement budget management
+- [x] Create dashboard
+- [x] Add expense summaries
+- [x] Add charts and reports
 
 ### Phase 5: Testing and Final Delivery
-- [ ] Test application functionality
+- [x] Test application functionality
 - [ ] Fix bugs
 - [ ] Improve user interface
 - [ ] Review security and data validation
