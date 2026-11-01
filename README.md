@@ -54,18 +54,18 @@ To develop a web application that allows users to manage their daily expenses, o
 - [x] Filter expenses by date or category
 
 ### Budget Management
-- [ ] Create personal budgets
-- [ ] Set spending limits
-- [ ] Monitor budget progress
-- [ ] Display remaining budget
-- [ ] Budget notifications
+- [x] Create personal budgets
+- [x] Set spending limits
+- [x] Monitor budget progress
+- [x] Display remaining budget
+- [x] Budget notifications
 
 ### Dashboard and Reports
 - [x] Display total expenses
 - [x] Display expenses by category
-- [ ] Generate monthly summaries
-- [ ] Add spending charts
-- [ ] Identify spending patterns
+- [x] Generate monthly summaries
+- [x] Add spending charts
+- [x] Identify spending patterns
 
 ---
 
@@ -239,13 +239,13 @@ docs: update project README
 - [x] Connect expense forms to Supabase
 
 ### Phase 4: Budgets and Dashboard
-- [ ] Implement budget management
-- [ ] Create dashboard
-- [ ] Add expense summaries
-- [ ] Add charts and reports
+- [x] Implement budget management
+- [x] Create dashboard
+- [x] Add expense summaries
+- [x] Add charts and reports
 
 ### Phase 5: Testing and Final Delivery
-- [ ] Test application functionality
+- [x] Test application functionality
 - [ ] Fix bugs
 - [ ] Improve user interface
 - [ ] Review security and data validation
