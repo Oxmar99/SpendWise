@@ -4,234 +4,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7f6">
     <title>SpendWise | Panel principal</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
+
     <main class="dashboard-container">
-        <section class="expense-summary">
-            <h2>Resumen de gastos</h2>
-            <p>Total registrado</p>
-            <h3 id="totalExpenses">$0.00</h3>
-        </section>
-        <section class="budget-section">
-            <h2>Mi presupuesto mensual</h2>
-            <div class="budget-card">
-            <p>Presupuesto establecido</p>
-            <h3 id="budgetLimit">$0.00</h3>
 
-            <p>Gastado durante el mes</p>
-            <h3 id="budgetSpent">$0.00</h3>
-
-            <p>Dinero disponible</p>
-            <h3 id="budgetRemaining">$0.00</h3>
-
-            <div
-                id="budgetProgressTrack"
-                role="progressbar"
-                aria-label="Porcentaje del presupuesto mensual utilizado"
-                aria-valuemin="0"
-                aria-valuemax="100"
-                aria-valuenow="0"
-                style="width: 100%; height: 18px; background: #e5e7eb;
-                    border-radius: 9px; overflow: hidden;"
-            >
-                <div
-                    id="budgetProgress"
-                    style="height: 100%; width: 0%; background: #238636;
-                        transition: width 0.3s ease;"
-                ></div>
-            </div>
-
-            <p id="budgetPercentage">0 % utilizado</p>
-            <p id="budgetMessage" role="status" aria-live="polite"></p>
-        </div>
-
-        <form id="budgetForm">
-            <label for="budgetAmount">
-                Establecer presupuesto mensual (MXN)
-            </label>
-
-            <input
-                type="number"
-                id="budgetAmount"
-                min="0.01"
-                max="999999999"
-                step="0.01"
-                placeholder="Ej. 3000.00"
-                required
-            >
-
-            <button type="submit" id="saveBudgetButton">
-                Guardar presupuesto
-            </button>
-        </form>
-        </section>
-
-        <section class="dashboard-analytics">
-            <h2>Estadísticas del mes</h2>
-
-            <div class="history-filter">
-                <label for="historyMonth">Consultar otro mes:</label>
-
-                <input
-                    type="month"
-                    id="historyMonth"
-                >
-
-                <button type="button" id="currentMonthButton">
-                    Mes actual
-                </button>
-            </div>
-
-            <div class="analytics-grid">
-                <article class="analytics-card">
-                    <p>Total gastado este mes</p>
-                    <h3 id="monthlyTotal">$0.00</h3>
-                </article>
-
-                <article class="analytics-card">
-                    <p>Gastos registrados</p>
-                    <h3 id="monthlyExpenseCount">0</h3>
-                </article>
-
-                <article class="analytics-card">
-                    <p>Gasto promedio</p>
-                    <h3 id="monthlyAverage">$0.00</h3>
-                </article>
-
-                <article class="analytics-card">
-                    <p>Comparación con el mes anterior</p>
-                    <h3 id="monthlyComparison">Sin datos</h3>
-                    <p id="monthlyComparisonMessage">
-                        Comparando tus gastos mensuales.
-                    </p>
-                </article>
-            </div>
-
-            <div class="category-chart-section">
-                <h2>Gastos por categoría</h2>
-                <p>Distribución de tus gastos durante el mes actual.</p>
-
-                <div id="categoryChart" aria-live="polite">
-                    <p>Cargando estadísticas...</p>
+        <!-- ENCABEZADO -->
+        <header class="dashboard-header">
+            <div class="dashboard-brand">
+                <div class="brand-icon">S</div>
+                <div>
+                    <h1>SpendWise</h1>
+                    <p id="welcomeMessage">¡Bienvenido!</p>
                 </div>
             </div>
-        </section>
 
-        <section class="budget-history-section">
-            <h2>Historial de presupuestos</h2>
-            <p>Consulta tus presupuestos y gastos de meses anteriores.</p>
-
-            <div id="budgetHistory" class="budget-history-container">
-                <p>Cargando historial...</p>
-            </div>
-        </section>
-
-        <header class="dashboard-header">
-            <div>
-                <h1>SpendWise</h1>
-                <p id="welcomeMessage">¡Bienvenido!</p>
-            </div>
             <button id="logoutButton" type="button">
                 Cerrar sesión
             </button>
         </header>
 
-        <section class="expense-summary">
-            <h2>Resumen de gastos</h2>
-            <p>Total registrado</p>
-            <h3 id="totalExpenses">$0.00</h3>
-        </section>
 
-        <section class="expense-form-section">
-            <h2>Registrar un gasto</h2>
+        <!-- VISTA: INICIO -->
+        <section id="homeView" class="app-view active-view">
 
-            <form id="expenseForm">
-                <label for="description">Descripción</label>
-                <input
-                    type="text"
-                    id="description"
-                    maxlength="100"
-                    placeholder="Ej. Café, transporte..."
-                    required
-                >
-
-                <input type="hidden" id="editingExpenseId">
-
-                <button
-                    type="button"
-                    id="cancelEditButton"
-                    hidden
-                >
-                    Cancelar edición
-                </button>
-
-                <label for="amount">Monto (MXN)</label>
-                <input
-                    type="number"
-                    id="amount"
-                    min="0.01"
-                    max="999999999"
-                    step="0.01"
-                    placeholder="Ej. 45.50"
-                    required
-                >
-
-                <label for="category">Categoría</label>
-                <select id="category" required>
-                    <option value="">Cargando categorías...</option>
-                </select>
-
-                <label for="expenseDate">Fecha del gasto</label>
-                <input
-                    type="date"
-                    id="expenseDate"
-                    required
-                >
-
-                <button type="submit" id="saveExpenseButton">
-                    Guardar gasto
-                </button>
-
-                <p id="formMessage" role="status" aria-live="polite"></p>
-            </form>
-        </section>
-
-        <section class="expense-list-section">
-            <h2>Mis últimos gastos</h2>
-            <div class="expense-filters">
-                <label for="searchExpense">Buscar gasto</label>
-                <input
-                    type="search"
-                    id="searchExpense"
-                    placeholder="Ej. Café, transporte..."
-                >
-
-                <label for="filterCategory">Categoría</label>
-                <select id="filterCategory">
-                    <option value="">Todas las categorías</option>
-                </select>
-
-                <label for="startDate">Desde</label>
-                <input type="date" id="startDate">
-
-                <label for="endDate">Hasta</label>
-                <input type="date" id="endDate">
-
-                <button type="button" id="clearFiltersButton">
-                    Limpiar filtros
-                </button>
+            <div class="view-heading">
+                <h2>Tu resumen financiero</h2>
+                <p>Así van tus finanzas este mes.</p>
             </div>
 
-            <div id="expensesList">
-                <p>Cargando movimientos...</p>
-            </div>
+            <!-- PRESUPUESTO -->
+            <section class="budget-section">
+                <div class="budget-card">
+
+                    <p>Presupuesto mensual</p>
+                    <h3 id="budgetLimit">$0.00</h3>
+
+                    <div class="budget-details">
+                        <div>
+                            <span>Gastado</span>
+                            <strong id="budgetSpent">$0.00</strong>
+                        </div>
+
+                        <div>
+                            <span>Disponible</span>
+                            <strong id="budgetRemaining">$0.00</strong>
+                        </div>
+                    </div>
+
+                    <div
+                        id="budgetProgressTrack"
+                        role="progressbar"
+                        aria-label="Porcentaje del presupuesto mensual utilizado"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                    >
+                        <div id="budgetProgress"></div>
+                    </div>
+
+                    <p id="budgetPercentage">0 % utilizado</p>
+                    <p id="budgetMessage" role="status" aria-live="polite"></p>
+
+                </div>
+
+                <form id="budgetForm">
+
+                    <label for="budgetAmount">
+                        Establecer presupuesto mensual (MXN)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="budgetAmount"
+                        min="0.01"
+                        max="999999999"
+                        step="0.01"
+                        placeholder="Ej. 3000.00"
+                        required
+                    >
+
+                    <button type="submit" id="saveBudgetButton">
+                        Guardar presupuesto
+                    </button>
+
+                </form>
+            </section>
+
+
+            <!-- RESUMEN DE GASTOS -->
+            <section class="home-expense-summary">
+                <p>Total registrado</p>
+                <h3 id="homeMonthlyTotal">$0.00</h3>
+                <span>Gastos del mes seleccionado</span>
+            </section>
+
+
+            <!-- AVISO -->
+            <section class="smart-notice">
+                <div class="notice-icon">💡</div>
+                <div>
+                    <h3>Consejo financiero</h3>
+                    <p>
+                        Mantén un seguimiento de tus gastos
+                        para cuidar tu presupuesto.
+                    </p>
+                </div>
+            </section>
+
+
+            <!-- ÚLTIMOS MOVIMIENTOS -->
+            <section class="recent-expenses-section">
+                <div class="section-heading">
+                    <h2>Últimos movimientos</h2>
+                    <button type="button" data-go="historyView">
+                        Ver todos
+                    </button>
+                </div>
+
+                <div id="recentExpenses">
+                    <p>Cargando movimientos...</p>
+                </div>
+            </section>
+
         </section>
+
+
+        <!-- VISTA: HISTORIAL -->
+        <section id="historyView" class="app-view" hidden>
+
+            <div class="view-heading">
+                <h2>Historial de gastos</h2>
+                <p>Consulta y administra tus movimientos.</p>
+            </div>
+
+            <button
+                type="button"
+                id="openFiltersButton"
+                class="open-filters-button"
+                aria-label="Abrir filtros"
+                aria-controls="filterPanel"
+                aria-expanded="false"
+            >
+                ☷ Filtros
+            </button>
+
+            <section class="expense-summary">
+                <p>Total de gastos filtrados</p>
+                <h3 id="totalExpenses">$0.00</h3>
+            </section>
+
+            <section class="expense-list-section">
+
+                <div id="filterPanel"
+                    class="filter-overlay"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="filterPanelTitle"
+                    hidden>
+
+                    <div class="filter-sheet">
+
+                        <div class="filter-header">
+                            <h2 id="filterPanelTitle">Filtrar gastos</h2>
+
+                            <button
+                                type="button"
+                                id="closeFiltersButton"
+                                aria-label="Cerrar filtros"
+                            >
+                                ✕
+                            </button>
+                        </div>
+
+                <div class="expense-filters">
+
+                    <label for="searchExpense">Buscar gasto</label>
+                    <input
+                        type="search"
+                        id="searchExpense"
+                        placeholder="Ej. Café, transporte..."
+                    >
+
+                    <label for="filterCategory">Categoría</label>
+                    <select id="filterCategory">
+                        <option value="">Todas las categorías</option>
+                    </select>
+
+                    <label for="startDate">Desde</label>
+                    <input type="date" id="startDate">
+
+                    <label for="endDate">Hasta</label>
+                    <input type="date" id="endDate">
+
+                    <button type="button" id="clearFiltersButton">
+                        Limpiar filtros
+                    </button>
+
+                            <button
+                                type="button"
+                                id="applyFiltersButton"
+                                class="apply-filters-button"
+                            >
+                                Aplicar filtros
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="expensesList">
+                    <p>Cargando movimientos...</p>
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- VISTA: ESTADÍSTICAS -->
+        <section id="statsView" class="app-view" hidden>
+
+            <div class="view-heading">
+                <h2>Estadísticas</h2>
+                <p>Conoce cómo se comportan tus gastos.</p>
+            </div>
+
+            <section class="dashboard-analytics">
+
+                <h2>Resumen del mes</h2>
+
+                <div class="history-filter">
+
+                    <label for="historyMonth">
+                        Consultar otro mes:
+                    </label>
+
+                    <input type="month" id="historyMonth">
+
+                    <button type="button" id="currentMonthButton">
+                        Mes actual
+                    </button>
+
+                </div>
+
+
+                <div class="analytics-grid">
+
+                    <article class="analytics-card">
+                        <p>Total gastado este mes</p>
+                        <h3 id="monthlyTotal">$0.00</h3>
+                    </article>
+
+                    <article class="analytics-card">
+                        <p>Gastos registrados</p>
+                        <h3 id="monthlyExpenseCount">0</h3>
+                    </article>
+
+                    <article class="analytics-card">
+                        <p>Gasto promedio</p>
+                        <h3 id="monthlyAverage">$0.00</h3>
+                    </article>
+
+                    <article class="analytics-card">
+                        <p>Comparación con el mes anterior</p>
+                        <h3 id="monthlyComparison">Sin datos</h3>
+                        <p id="monthlyComparisonMessage">
+                            Comparando tus gastos mensuales.
+                        </p>
+                    </article>
+
+                </div>
+
+
+                <div class="category-chart-section">
+
+                    <h2>Gastos por categoría</h2>
+
+                    <p>Distribución de tus gastos durante el mes.</p>
+
+                    <div id="categoryChart" aria-live="polite">
+                        <p>Cargando estadísticas...</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- HISTORIAL DE PRESUPUESTOS -->
+            <section class="budget-history-section">
+
+                <h2>Historial de presupuestos</h2>
+
+                <p>
+                    Consulta tus presupuestos y gastos de meses anteriores.
+                </p>
+
+                <div id="budgetHistory" class="budget-history-container">
+                    <p>Cargando historial...</p>
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- VISTA: PERFIL -->
+        <section id="profileView" class="app-view" hidden>
+
+            <div class="view-heading">
+                <h2>Mi perfil</h2>
+                <p>Tu cuenta de SpendWise.</p>
+            </div>
+
+            <section class="profile-card">
+                <div class="profile-avatar">👤</div>
+
+                <h3 id="profileName">Usuario SpendWise</h3>
+
+                <p id="profileEmail">
+                    Información de tu cuenta.
+                </p>
+
+                <button id="profileLogoutButton" type="button">
+                    Cerrar sesión
+                </button>
+            </section>
+
+        </section>
+
+
+        <!-- FORMULARIO DE GASTOS -->
+        <section id="expenseModal" class="expense-modal" hidden>
+
+            <div class="expense-modal-content">
+
+                <div class="section-heading">
+                    <h2>Registrar un gasto</h2>
+
+                    <button
+                        type="button"
+                        id="closeExpenseModal"
+                        aria-label="Cerrar formulario"
+                    >
+                        ✕
+                    </button>
+                </div>
+
+                <form id="expenseForm">
+
+                    <label for="description">Descripción</label>
+
+                    <input
+                        type="text"
+                        id="description"
+                        maxlength="100"
+                        placeholder="Ej. Café, transporte..."
+                        required
+                    >
+
+                    <input type="hidden" id="editingExpenseId">
+
+                    <button
+                        type="button"
+                        id="cancelEditButton"
+                        hidden
+                    >
+                        Cancelar edición
+                    </button>
+
+                    <label for="amount">Monto (MXN)</label>
+
+                    <input
+                        type="number"
+                        id="amount"
+                        min="0.01"
+                        max="999999999"
+                        step="0.01"
+                        placeholder="Ej. 45.50"
+                        required
+                    >
+
+                    <label for="category">Categoría</label>
+
+                    <select id="category" required>
+                        <option value="">Cargando categorías...</option>
+                    </select>
+
+                    <label for="expenseDate">Fecha del gasto</label>
+
+                    <input type="date" id="expenseDate" required>
+
+                    <button type="submit" id="saveExpenseButton">
+                        Guardar gasto
+                    </button>
+
+                    <p id="formMessage" role="status" aria-live="polite"></p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- BOTÓN FLOTANTE -->
+        <button
+            type="button"
+            id="addExpenseButton"
+            class="floating-add-button"
+            aria-label="Registrar nuevo gasto"
+        >
+            +
+        </button>
+
+
+        <!-- NAVEGACIÓN INFERIOR -->
+        <nav class="bottom-navigation" aria-label="Navegación principal">
+
+            <button type="button" class="nav-item active" data-view="homeView">
+                <span>⌂</span>
+                <small>Inicio</small>
+            </button>
+
+            <button type="button" class="nav-item" data-view="historyView">
+                <span>▤</span>
+                <small>Historial</small>
+            </button>
+
+            <button type="button" class="nav-item" data-view="statsView">
+                <span>◔</span>
+                <small>Estadísticas</small>
+            </button>
+
+            <button type="button" class="nav-item" data-view="profileView">
+                <span>♙</span>
+                <small>Perfil</small>
+            </button>
+
+        </nav>
+
     </main>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/dashboard.js"></script>
+
 </body>
 </html>
-

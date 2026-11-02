@@ -1050,3 +1050,801 @@ body {
     border-radius: 10px;
     transition: width 0.3s ease;
 }
+
+
+/* =====================================
+   SPENDWISE - MOBILE FIRST
+   Primera etapa: estructura visual
+===================================== */
+
+body:has(.app-view) {
+    background: #f5f7f6;
+    color: #17221f;
+    font-family: "DM Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Evita que se muestren vistas ocultas */
+[hidden] {
+    display: none !important;
+}
+
+/* Contenedor principal de la aplicación */
+body:has(.app-view) main {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px 16px 130px;
+    box-sizing: border-box;
+}
+
+/* Títulos */
+.app-view h1,
+.app-view h2,
+.app-view h3 {
+    color: #17221f;
+    line-height: 1.3;
+}
+
+.app-view h2 {
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.app-view p {
+    color: #63716c;
+    line-height: 1.5;
+}
+
+/* Tarjetas del inicio */
+#homeView > section,
+#homeView > article {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    border: 1px solid #e6eeea;
+    box-shadow: 0 6px 20px rgba(25, 70, 52, 0.05);
+}
+
+/* Valores financieros */
+#budgetLimit,
+#homeMonthlyTotal {
+    color: #1f6f5c;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+#budgetSpent,
+#budgetRemaining {
+    font-size: 19px;
+    font-weight: 700;
+}
+
+/* Barra de progreso */
+#budgetProgressTrack {
+    width: 100%;
+    height: 12px;
+    margin: 16px 0 8px;
+    background: #e8f3ef;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#budgetProgress {
+    height: 100%;
+    background: #1f6f5c;
+    border-radius: 20px;
+    transition: width 0.3s ease;
+}
+
+/* Formulario de presupuesto */
+#budgetForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#budgetAmount {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dfe6e2;
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+#saveBudgetButton {
+    padding: 13px;
+    background: #1f6f5c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Últimos movimientos */
+#recentExpenses {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#recentExpenses .expense-item {
+    background: #ffffff;
+    padding: 15px;
+    border: 1px solid #e6eeea;
+    border-radius: 14px;
+}
+
+#recentExpenses .expense-item h3 {
+    font-size: 16px;
+    margin: 0 0 6px;
+}
+
+#recentExpenses .expense-item p {
+    font-size: 13px;
+    margin: 3px 0;
+}
+
+#recentExpenses .expense-item strong {
+    display: block;
+    color: #1f6f5c;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+/* Navegación inferior */
+nav:has(.nav-item) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 8px calc(12px + env(safe-area-inset-bottom));
+    background: white;
+    border-top: 1px solid #e6eeea;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.04);
+    z-index: 100;
+}
+
+.nav-item {
+    flex: 1;
+    padding: 10px 4px;
+    background: transparent;
+    color: #63716c;
+    border: none;
+    border-radius: 12px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.nav-item.active {
+    background: #e8f3ef;
+    color: #1f6f5c;
+    font-weight: 700;
+}
+
+/* Botón flotante para agregar gastos */
+#addExpenseButton {
+    position: fixed;
+    bottom: calc(90px + env(safe-area-inset-bottom));
+    right: max(20px, calc((100vw - 480px) / 2 + 20px));
+    width: 58px;
+    height: 58px;
+    border: none;
+    border-radius: 50%;
+    background: #1f6f5c;
+    color: white;
+    font-size: 30px;
+    box-shadow: 0 8px 22px rgba(31, 111, 92, 0.3);
+    cursor: pointer;
+    z-index: 110;
+}
+
+/* Adaptación inicial a pantallas grandes */
+@media (min-width: 768px) {
+    body:has(.app-view) main {
+        max-width: 900px;
+        padding: 32px 28px 130px;
+    }
+}
+
+
+/* =====================================
+   VENTANA EMERGENTE DE GASTOS
+===================================== */
+
+#expenseModal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(14, 32, 25, 0.55);
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+#expenseModal[hidden] {
+    display: none !important;
+}
+
+/* Contenedor del formulario */
+#expenseModal > :first-child {
+    width: 100%;
+    max-width: 480px;
+    max-height: 90dvh;
+    overflow-y: auto;
+
+    background: white;
+    border-radius: 24px 24px 18px 18px;
+    padding: 24px;
+    box-sizing: border-box;
+
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+}
+
+/* Campos */
+#expenseForm input,
+#expenseForm select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #dfe6e2;
+    border-radius: 12px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+/* Botón principal */
+#saveExpenseButton {
+    width: 100%;
+    padding: 15px;
+    background: #1f6f5c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* En computadoras se centra */
+@media (min-width: 768px) {
+    #expenseModal {
+        align-items: center;
+    }
+
+    #expenseModal > :first-child {
+        border-radius: 24px;
+        max-width: 520px;
+    }
+}
+
+/* Ocultar el botón flotante en Perfil */
+#addExpenseButton.hide-add-button {
+    display: none !important;
+}
+
+
+/* ===================================
+   HISTORIAL - PANEL DE FILTROS
+=================================== */
+
+#historyView {
+    position: relative;
+}
+
+.open-filters-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 11px 14px;
+    background: #e8f3ef;
+    color: #1f6f5c;
+
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Fondo oscuro del panel */
+#filterPanel {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    background: rgba(14, 32, 25, 0.55);
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+#filterPanel[hidden] {
+    display: none !important;
+}
+
+/* Ventana de filtros */
+.filter-sheet {
+    width: 100%;
+    max-width: 480px;
+    max-height: 90dvh;
+    overflow-y: auto;
+
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+
+    box-sizing: border-box;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.filter-header h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+#closeFiltersButton {
+    width: 38px;
+    height: 38px;
+    background: #f2f5f3;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Campos de filtrado */
+#filterPanel input,
+#filterPanel select {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin: 8px 0 16px;
+
+    border: 1px solid #dfe6e2;
+    border-radius: 12px;
+    background: white;
+
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+#filterPanel label {
+    display: block;
+    color: #17221f;
+    font-weight: 600;
+}
+
+/* Botones */
+#applyFiltersButton {
+    width: 100%;
+    padding: 15px;
+    margin-top: 16px;
+
+    background: #1f6f5c;
+    color: white;
+
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#clearFiltersButton {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dfe6e2;
+    border-radius: 12px;
+    background: white;
+    color: #1f6f5c;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* En computadoras: panel centrado */
+@media (min-width: 768px) {
+    #filterPanel {
+        align-items: center;
+    }
+
+    .filter-sheet {
+        max-width: 500px;
+    }
+}
+
+
+/* =====================================
+   HISTORIAL - TARJETAS DE MOVIMIENTOS
+===================================== */
+
+#expensesList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+#expensesList .expense-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 5px 12px;
+
+    background: #ffffff;
+    border: 1px solid #e6eeea;
+    border-radius: 18px;
+
+    padding: 17px;
+    box-shadow: 0 4px 15px rgba(25, 70, 52, 0.04);
+}
+
+/* Nombre del gasto */
+#expensesList .expense-item h3 {
+    grid-column: 1;
+    grid-row: 1;
+
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* Categoría y fecha */
+#expensesList .expense-item p {
+    grid-column: 1;
+    margin: 0;
+    color: #63716c;
+    font-size: 13px;
+}
+
+#expensesList .expense-item p:first-of-type {
+    grid-row: 2;
+}
+
+#expensesList .expense-item p:nth-of-type(2) {
+    grid-row: 3;
+}
+
+/* Cantidad */
+#expensesList .expense-item strong {
+    grid-column: 2;
+    grid-row: 1;
+
+    color: #1f6f5c;
+    font-size: 17px;
+    white-space: nowrap;
+}
+
+/* Botones existentes */
+#expensesList .edit-expense-button,
+#expensesList .delete-expense-button {
+    margin-top: 12px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+#expensesList .edit-expense-button {
+    grid-column: 1;
+    grid-row: 4;
+    justify-self: start;
+
+    background: #e8f3ef;
+    color: #1f6f5c;
+    border: none;
+}
+
+#expensesList .delete-expense-button {
+    grid-column: 2;
+    grid-row: 4;
+
+    background: #fff1f1;
+    color: #c94b4b;
+    border: none;
+}
+
+
+/* =====================================
+   SPENDWISE - HISTORIAL COMPACTO
+===================================== */
+
+#expensesList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Tarjeta */
+#expensesList .expense-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background: #ffffff;
+    padding: 14px;
+
+    border: 1px solid #e6eeea;
+    border-radius: 16px;
+
+    box-shadow: 0 3px 12px rgba(25, 70, 52, 0.04);
+}
+
+/* Fila principal */
+#expensesList .expense-main-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+/* Icono */
+#expensesList .expense-category-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+
+    background: #e8f3ef;
+    border-radius: 13px;
+
+    font-size: 22px;
+}
+
+/* Información */
+#expensesList .expense-information {
+    flex: 1;
+    min-width: 0;
+}
+
+#expensesList .expense-information h3 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+#expensesList .expense-information p {
+    margin: 0;
+    color: #63716c;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* Cantidad */
+#expensesList .expense-amount {
+    color: #1f6f5c;
+    font-size: 15px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Acciones */
+#expensesList .expense-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+#expensesList .expense-actions button {
+    margin: 0;
+    padding: 7px 11px;
+
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+#expensesList .edit-expense-button {
+    background: #e8f3ef;
+    color: #1f6f5c;
+    border: none;
+}
+
+#expensesList .delete-expense-button {
+    background: #fff1f1;
+    color: #c94b4b;
+    border: none;
+}
+
+/* Espacio para el botón + y la navegación */
+#historyView {
+    padding-bottom: 100px;
+}
+
+
+/* =====================================
+   SPENDWISE - MENÚ DE TRES PUNTOS
+===================================== */
+
+/* Menú dentro de cada movimiento */
+#expensesList .expense-menu {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Botón de tres puntos */
+#expensesList .expense-menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 38px;
+
+    border-radius: 10px;
+    background: transparent;
+    color: #63716c;
+
+    font-size: 25px;
+    font-weight: 700;
+    cursor: pointer;
+
+    list-style: none;
+    user-select: none;
+}
+
+/* Ocultar marcador predeterminado */
+#expensesList .expense-menu-button::-webkit-details-marker {
+    display: none;
+}
+
+#expensesList .expense-menu-button:hover,
+#expensesList .expense-menu[open] .expense-menu-button {
+    background: #e8f3ef;
+    color: #1f6f5c;
+}
+
+/* Opciones desplegables */
+#expensesList .expense-menu-options {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+
+    width: 170px;
+    padding: 7px;
+
+    background: white;
+    border: 1px solid #dfe6e2;
+    border-radius: 14px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    z-index: 50;
+}
+
+/* Botones del menú */
+#expensesList .expense-menu-options button {
+    display: block;
+    width: 100%;
+
+    margin: 0;
+    padding: 12px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: transparent;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+
+#expensesList .expense-menu-options
+.edit-expense-button {
+    color: #1f6f5c;
+}
+
+#expensesList .expense-menu-options
+.delete-expense-button {
+    color: #c94b4b;
+}
+
+#expensesList .expense-menu-options button:hover {
+    background: #f5f7f6;
+}
+
+/* Mantener visible el menú */
+#expensesList,
+#expensesList .expense-item {
+    overflow: visible;
+}
+
+/* Espacio entre cantidad y menú */
+#expensesList .expense-main-row {
+    gap: 9px;
+}
+
+#expensesList .expense-amount {
+    font-size: 14px;
+}
+
+
+/* =====================================
+   SPENDWISE - AJUSTES FINALES HISTORIAL
+===================================== */
+
+/* Más espacio al final para navegar cómodamente */
+#historyView {
+    padding-bottom: 150px;
+}
+
+/* Distribución de los movimientos */
+#expensesList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 18px;
+    padding-bottom: 20px;
+}
+
+/* Separación entre contenido y botón flotante */
+#addExpenseButton {
+    bottom: calc(96px + env(safe-area-inset-bottom));
+    right: max(
+        18px,
+        calc((100vw - 480px) / 2 + 18px)
+    );
+
+    width: 56px;
+    height: 56px;
+
+    z-index: 110;
+}
+
+/* Evitar que elementos internos desborden */
+#expensesList .expense-information {
+    min-width: 0;
+}
+
+/* Ajustar la visualización en pantallas pequeñas */
+@media (max-width: 380px) {
+    #expensesList .expense-item {
+        padding: 12px;
+    }
+
+    #expensesList .expense-category-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        font-size: 19px;
+    }
+
+    #expensesList .expense-amount {
+        font-size: 13px;
+    }
+}

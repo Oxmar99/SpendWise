@@ -430,6 +430,8 @@ async function checkSession() {
         `Bienvenido, ${currentUser.user_metadata?.full_name
         || currentUser.email}`;
 
+        renderProfile();
+
     return true;
 }
 
@@ -533,12 +535,113 @@ async function loadExpenses() {
     allExpenses = data || [];
 
     renderExpenses();
+    renderHomeSummary();
+    renderRecentExpenses();
 
     if (currentUser) {
         renderBudget();
         renderDashboardStats();
     }
     await loadBudgetHistory();
+}
+
+function renderHomeSummary() {
+    const homeMonthlyTotal = document.getElementById("homeMonthlyTotal");
+
+    const monthlyExpenses = allExpenses.filter(expense =>
+        expense.expense_date.slice(0, 7) === selectedMonth
+    );
+
+    const total = monthlyExpenses.reduce(
+        (sum, expense) => sum + Number(expense.amount),
+        0
+    );
+
+    homeMonthlyTotal.textContent = formatCurrency(total);
+}
+
+function renderRecentExpenses() {
+    const recentExpenses = document.getElementById("recentExpenses");
+
+    recentExpenses.replaceChildren();
+
+    const latestExpenses = allExpenses.slice(0, 3);
+
+    if (latestExpenses.length === 0) {
+        recentExpenses.textContent =
+            "Todavía no tienes gastos registrados.";
+
+        return;
+    }
+
+    latestExpenses.forEach(expense => {
+        const category = categories.find(
+            item => String(item.id) === String(expense.category_id)
+        );
+
+        const card = document.createElement("article");
+        card.className = "expense-item";
+
+        const description = document.createElement("h3");
+        description.textContent = expense.description;
+
+        const categoryText = document.createElement("p");
+        categoryText.textContent =
+            category?.name || "Sin categoría";
+
+        const dateText = document.createElement("p");
+        dateText.textContent = expense.expense_date;
+
+        const amount = document.createElement("strong");
+        amount.textContent = formatCurrency(expense.amount);
+
+        card.append(
+            description,
+            categoryText,
+            dateText,
+            amount
+        );
+
+        recentExpenses.appendChild(card);
+    });
+}
+
+
+function getCategoryIcon(categoryName) {
+    const name = (categoryName || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+    if (name.includes("comida") || name.includes("alimento")) {
+        return "🍽️";
+    }
+
+    if (name.includes("transporte")) {
+        return "🚌";
+    }
+
+    if (name.includes("entretenimiento") || name.includes("ocio")) {
+        return "🎮";
+    }
+
+    if (name.includes("educacion")) {
+        return "📚";
+    }
+
+    if (name.includes("salud")) {
+        return "💊";
+    }
+
+    if (name.includes("compras")) {
+        return "🛍️";
+    }
+
+    if (name.includes("servicio")) {
+        return "💡";
+    }
+
+    return "💳";
 }
 
 function renderExpenses() {
@@ -598,61 +701,100 @@ function renderExpenses() {
         return;
     }
 
+    
+    
     filteredExpenses.forEach((expense) => {
         const category = categories.find(
-            (item) => String(item.id) === String(expense.category_id)
+            item => String(item.id) === String(expense.category_id)
         );
 
+        const categoryName = category?.name || "Sin categoría";
+
+        // Tarjeta principal
         const card = document.createElement("article");
         card.className = "expense-item";
+
+        // Fila principal
+        const mainRow = document.createElement("div");
+        mainRow.className = "expense-main-row";
+
+        // Icono de categoría
+        const icon = document.createElement("div");
+        icon.className = "expense-category-icon";
+        icon.textContent = getCategoryIcon(categoryName);
+        icon.setAttribute("aria-hidden", "true");
+
+        // Información del gasto
+        const information = document.createElement("div");
+        information.className = "expense-information";
 
         const description = document.createElement("h3");
         description.textContent = expense.description;
 
-        const categoryText = document.createElement("p");
-        categoryText.textContent =
-            `Categoría: ${category?.name || "Sin categoría"}`;
+        const details = document.createElement("p");
+        details.textContent =
+            `${categoryName} · ${expense.expense_date}`;
 
-        const dateText = document.createElement("p");
-        dateText.textContent = `Fecha: ${expense.expense_date}`;
+        information.append(description, details);
 
-        const amountText = document.createElement("strong");
-        amountText.textContent = formatCurrency(expense.amount);
+        // Cantidad
+        const amount = document.createElement("strong");
+        amount.className = "expense-amount";
+        amount.textContent = formatCurrency(expense.amount);
 
+        // Menú de tres puntos
+        const menu = document.createElement("details");
+        menu.className = "expense-menu";
+
+        const menuButton = document.createElement("summary");
+        menuButton.className = "expense-menu-button";
+        menuButton.textContent = "⋮";
+        menuButton.setAttribute(
+            "aria-label",
+            `Opciones de ${expense.description}`
+        );
+
+        const menuOptions = document.createElement("div");
+        menuOptions.className = "expense-menu-options";
+
+        // Opción Editar
         const editButton = document.createElement("button");
         editButton.type = "button";
-        editButton.textContent = "Editar";
         editButton.className = "edit-expense-button";
+        editButton.textContent = "Editar gasto";
 
         editButton.addEventListener("click", () => {
+            menu.open = false;
             startEditingExpense(expense);
         });
 
+        // Opción Eliminar
         const deleteButton = document.createElement("button");
         deleteButton.type = "button";
-        deleteButton.textContent = "Eliminar";
         deleteButton.className = "delete-expense-button";
+        deleteButton.textContent = "Eliminar gasto";
 
         deleteButton.addEventListener("click", async () => {
+            menu.open = false;
             await deleteExpense(expense.id);
         });
 
-        card.append(
-            description,
-            categoryText,
-            dateText,
-            amountText,
-            editButton,
-            deleteButton
-        );
+        menuOptions.append(editButton, deleteButton);
+        menu.append(menuButton, menuOptions);
 
+        // Construcción final
+        mainRow.append(icon, information, amount, menu);
+        card.appendChild(mainRow);
         expensesList.appendChild(card);
     });
 }
 
+
 function startEditingExpense(expense) {
+    // Identificar el gasto que se editará
     editingExpenseId.value = expense.id;
 
+    // Cargar los datos actuales
     document.getElementById("description").value =
         expense.description;
 
@@ -663,16 +805,18 @@ function startEditingExpense(expense) {
 
     expenseDate.value = expense.expense_date;
 
+    // Cambiar el formulario a modo edición
     saveExpenseButton.textContent = "Guardar cambios";
     cancelEditButton.hidden = false;
 
-    showMessage("Editando gasto. Modifica los campos necesarios.");
+    showMessage(
+        "Editando gasto. Modifica los campos necesarios."
+    );
 
-    expenseForm.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
+    // Abrir la ventana emergente
+    openExpenseModal();
 }
+
 
 function cancelEditingExpense() {
     editingExpenseId.value = "";
@@ -848,11 +992,6 @@ async function initializeDashboard() {
 initializeDashboard();
 
 
-searchExpense.addEventListener("input", renderExpenses);
-filterCategory.addEventListener("change", renderExpenses);
-startDate.addEventListener("change", renderExpenses);
-endDate.addEventListener("change", renderExpenses);
-
 clearFiltersButton.addEventListener("click", () => {
     searchExpense.value = "";
     filterCategory.value = "";
@@ -979,3 +1118,205 @@ async function loadBudgetHistory() {
             "<p>No fue posible cargar el historial de presupuestos.</p>";
     }
 }
+
+
+// ======================================
+// NAVEGACIÓN PRINCIPAL DE SPENDWISE
+// ======================================
+
+const navigationItems = document.querySelectorAll(".nav-item");
+const appViews = document.querySelectorAll(".app-view");
+
+function showView(viewId) {
+    appViews.forEach(view => {
+        const isActive = view.id === viewId;
+
+        view.hidden = !isActive;
+        view.classList.toggle("active-view", isActive);
+    });
+
+    navigationItems.forEach(item => {
+        const isActive = item.dataset.view === viewId;
+
+        item.classList.toggle("active", isActive);
+    });
+
+    // Mostrar el botón + excepto en Perfil
+    const expenseButton = document.getElementById("addExpenseButton");
+
+    if (expenseButton) {
+        expenseButton.classList.toggle(
+            "hide-add-button",
+            viewId === "profileView"
+        );
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+navigationItems.forEach(item => {
+    item.addEventListener("click", () => {
+        showView(item.dataset.view);
+    });
+});
+
+// Botones que llevan a otras secciones
+document.querySelectorAll("[data-go]").forEach(button => {
+    button.addEventListener("click", () => {
+        showView(button.dataset.go);
+    });
+});
+
+
+// ======================================
+// FORMULARIO FLOTANTE DE GASTOS
+// ======================================
+
+const expenseModal = document.getElementById("expenseModal");
+const addExpenseButton = document.getElementById("addExpenseButton");
+const closeExpenseModal = document.getElementById("closeExpenseModal");
+
+function openExpenseModal() {
+    expenseModal.hidden = false;
+}
+
+function closeExpenseModalWindow() {
+    expenseModal.hidden = true;
+    cancelEditingExpense();
+}
+
+addExpenseButton.addEventListener("click", () => {
+    cancelEditingExpense();
+    openExpenseModal();
+});
+
+closeExpenseModal.addEventListener("click", () => {
+    closeExpenseModalWindow();
+});
+
+// Cerrar al pulsar fuera del formulario
+expenseModal.addEventListener("click", event => {
+    if (event.target === expenseModal) {
+        closeExpenseModalWindow();
+    }
+});
+
+// ======================================
+// INFORMACIÓN DEL PERFIL
+// ======================================
+
+const profileName = document.getElementById("profileName");
+const profileEmail = document.getElementById("profileEmail");
+const profileLogoutButton = document.getElementById("profileLogoutButton");
+
+function renderProfile() {
+    if (!currentUser) return;
+
+    profileName.textContent =
+        currentUser.user_metadata?.full_name || "Usuario SpendWise";
+
+    profileEmail.textContent =
+        currentUser.email || "";
+}
+
+profileLogoutButton.addEventListener("click", () => {
+    logoutButton.click();
+});
+
+
+// ======================================
+// PANEL DE FILTROS DEL HISTORIAL
+// ======================================
+
+const filterPanel = document.getElementById("filterPanel");
+
+const openFiltersButton =
+    document.getElementById("openFiltersButton");
+
+const closeFiltersButton =
+    document.getElementById("closeFiltersButton");
+
+const applyFiltersButton =
+    document.getElementById("applyFiltersButton");
+
+// Abrir los filtros
+function openFilterPanel() {
+    filterPanel.hidden = false;
+
+    openFiltersButton.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+    closeFiltersButton.focus();
+}
+
+// Cerrar los filtros
+function closeFilterPanel() {
+    filterPanel.hidden = true;
+
+    openFiltersButton.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+    openFiltersButton.focus();
+}
+
+// Abrir al pulsar el botón
+openFiltersButton.addEventListener(
+    "click",
+    openFilterPanel
+);
+
+// Cerrar al pulsar la X
+closeFiltersButton.addEventListener(
+    "click",
+    closeFilterPanel
+);
+
+// Aplicar filtros y cerrar
+applyFiltersButton.addEventListener("click", () => {
+    renderExpenses();
+    closeFilterPanel();
+});
+
+// Cerrar al pulsar fuera de la ventana
+filterPanel.addEventListener("click", (event) => {
+    if (event.target === filterPanel) {
+        closeFilterPanel();
+    }
+});
+
+// Cerrar con Escape
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !filterPanel.hidden) {
+        closeFilterPanel();
+    }
+});
+
+// Cerrar menús de gastos al pulsar fuera
+document.addEventListener("click", (event) => {
+    document.querySelectorAll(
+        "#expensesList .expense-menu[open]"
+    ).forEach(menu => {
+        if (!menu.contains(event.target)) {
+            menu.open = false;
+        }
+    });
+});
+
+// Cerrar menús con Escape
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        document.querySelectorAll(
+            "#expensesList .expense-menu[open]"
+        ).forEach(menu => {
+            menu.open = false;
+        });
+    }
+});
+
