@@ -1848,3 +1848,71 @@ nav:has(.nav-item) {
         font-size: 13px;
     }
 }
+
+
+/* =====================================
+   SPENDWISE - LIMPIEZA DEL HISTORIAL
+===================================== */
+
+/* Eliminar tarjeta exterior innecesaria */
+#historyView .expense-list-section {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    padding: 0;
+    margin: 0;
+
+    width: 100%;
+    max-width: none;
+    border-radius: 0;
+    overflow: visible;
+}
+
+/* Lista de movimientos */
+#historyView #expensesList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin-top: 18px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* Conservar el resumen como tarjeta independiente */
+#historyView .expense-summary {
+    background: #ffffff;
+    padding: 18px 20px;
+    margin: 18px 0;
+
+    border: 1px solid #e6eeea;
+    border-radius: 18px;
+
+    box-shadow: 0 4px 15px rgba(25, 70, 52, 0.04);
+}
+
+#historyView .expense-summary p {
+    margin: 0 0 6px;
+    font-size: 13px;
+    color: #63716c;
+}
+
+#historyView #totalExpenses {
+    margin: 0;
+    color: #1f6f5c;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+/* Evitar que el botón Filtros tape el título */
+#historyView .view-heading {
+    padding-right: 115px;
+}
+
+/* Espacio inferior para la navegación */
+#historyView {
+    padding-bottom: 150px;
+}
