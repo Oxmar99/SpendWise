@@ -266,7 +266,7 @@ function renderDashboardStats() {
 function renderCategoryChart(currentExpenses, currentTotal) {
     categoryChart.replaceChildren();
 
-    if (currentExpenses.length === 0) {
+    if (currentExpenses.length === 0 || currentTotal <= 0) {
         categoryChart.textContent =
             "Todavía no hay gastos registrados este mes.";
         return;
@@ -290,38 +290,91 @@ function renderCategoryChart(currentExpenses, currentTotal) {
     const sortedCategories = [...totalsByCategory.entries()]
         .sort((a, b) => b[1] - a[1]);
 
-    sortedCategories.forEach(([name, amount]) => {
+    const colors = [
+        "#1f6f5c", "#4da68d", "#8bcbb4", "#e2ac57",
+        "#d98076", "#8799b2", "#a18bc5", "#a3afa4"
+    ];
+
+    const layout = document.createElement("div");
+    layout.className = "stats-category-layout";
+
+    const donutArea = document.createElement("div");
+    donutArea.className = "stats-donut-area";
+
+    const donut = document.createElement("div");
+    donut.className = "stats-donut";
+    donut.setAttribute("role", "img");
+    donut.setAttribute("aria-label", "Distribución de gastos por categoría");
+
+    const center = document.createElement("div");
+    center.className = "stats-donut-center";
+
+    const centerLabel = document.createElement("span");
+    centerLabel.textContent = "Total del mes";
+
+    const centerAmount = document.createElement("strong");
+    centerAmount.textContent = formatCurrency(currentTotal);
+
+    center.append(centerLabel, centerAmount);
+    donut.appendChild(center);
+    donutArea.appendChild(donut);
+
+    const ranking = document.createElement("div");
+    ranking.className = "stats-ranking";
+
+    const rankingTitle = document.createElement("h3");
+    rankingTitle.textContent = "Ranking de categorías";
+
+    const rankingList = document.createElement("ol");
+    rankingList.className = "stats-ranking-list";
+
+    let startAngle = 0;
+    const segments = [];
+
+    sortedCategories.forEach(([name, amount], index) => {
         const percentage = currentTotal > 0
             ? (amount / currentTotal) * 100
             : 0;
 
-        const item = document.createElement("div");
-        item.className = "category-chart-item";
+        const color = colors[index % colors.length];
+        const endAngle = startAngle + (amount / currentTotal) * 360;
+        segments.push(`${color} ${startAngle}deg ${endAngle}deg`);
+        startAngle = endAngle;
 
-        const heading = document.createElement("div");
-        heading.className = "category-chart-heading";
+        const item = document.createElement("li");
+        item.className = "stats-ranking-item";
+
+        const position = document.createElement("span");
+        position.className = "stats-ranking-position";
+        position.textContent = String(index + 1);
+
+        const dot = document.createElement("span");
+        dot.className = "stats-ranking-dot";
+        dot.style.backgroundColor = color;
+        dot.setAttribute("aria-hidden", "true");
+
+        const details = document.createElement("div");
+        details.className = "stats-ranking-details";
 
         const nameElement = document.createElement("span");
         nameElement.textContent = name;
 
+        const percentageElement = document.createElement("small");
+        percentageElement.textContent = `${percentage.toFixed(1)} % del total`;
+
+        details.append(nameElement, percentageElement);
+
         const amountElement = document.createElement("strong");
-        amountElement.textContent =
-            `${formatCurrency(amount)} (${percentage.toFixed(1)} %)`;
+        amountElement.textContent = formatCurrency(amount);
 
-        heading.append(nameElement, amountElement);
-
-        const track = document.createElement("div");
-        track.className = "category-chart-track";
-        track.setAttribute("aria-hidden", "true");
-
-        const bar = document.createElement("div");
-        bar.className = "category-chart-bar";
-        bar.style.width = `${percentage}%`;
-
-        track.appendChild(bar);
-        item.append(heading, track);
-        categoryChart.appendChild(item);
+        item.append(position, dot, details, amountElement);
+        rankingList.appendChild(item);
     });
+
+    donut.style.background = `conic-gradient(${segments.join(", ")})`;
+    ranking.append(rankingTitle, rankingList);
+    layout.append(donutArea, ranking);
+    categoryChart.appendChild(layout);
 }
 
 budgetForm.addEventListener("submit", async (event) => {

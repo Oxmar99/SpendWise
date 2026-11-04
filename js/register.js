@@ -64,7 +64,7 @@ class RegisterForm {
             this.showFieldError(
                 this.nameInput,
                 this.nameError,
-                "Please enter your full name."
+                "Ingresa tu nombre completo."
             );
             return false;
         }
@@ -73,7 +73,7 @@ class RegisterForm {
             this.showFieldError(
                 this.nameInput,
                 this.nameError,
-                "Name must contain at least 3 characters."
+                "El nombre debe tener al menos 3 caracteres."
             );
             return false;
         }
@@ -88,7 +88,7 @@ class RegisterForm {
             this.showFieldError(
                 this.emailInput,
                 this.emailError,
-                "Please enter your email address."
+                "Ingresa tu correo electrónico."
             );
             return false;
         }
@@ -99,7 +99,7 @@ class RegisterForm {
             this.showFieldError(
                 this.emailInput,
                 this.emailError,
-                "Please enter a valid email address."
+                "Ingresa un correo electrónico válido."
             );
             return false;
         }
@@ -114,7 +114,7 @@ class RegisterForm {
             this.showFieldError(
                 this.passwordInput,
                 this.passwordError,
-                "Please create a password."
+                "Crea una contraseña."
             );
             return false;
         }
@@ -123,7 +123,7 @@ class RegisterForm {
             this.showFieldError(
                 this.passwordInput,
                 this.passwordError,
-                "Password must contain at least 6 characters."
+                "La contraseña debe tener al menos 6 caracteres."
             );
             return false;
         }
@@ -139,7 +139,7 @@ class RegisterForm {
             this.showFieldError(
                 this.confirmPasswordInput,
                 this.confirmPasswordError,
-                "Please confirm your password."
+                "Confirma tu contraseña."
             );
             return false;
         }
@@ -148,7 +148,7 @@ class RegisterForm {
             this.showFieldError(
                 this.confirmPasswordInput,
                 this.confirmPasswordError,
-                "Passwords do not match."
+                "Las contraseñas no coinciden."
             );
             return false;
         }
@@ -172,10 +172,13 @@ class RegisterForm {
         const isPassword = this.passwordInput.type === "password";
 
         this.passwordInput.type = isPassword ? "text" : "password";
-        this.togglePasswordButton.textContent = isPassword ? "Hide" : "Show";
+
+        this.togglePasswordButton.textContent =
+            isPassword ? "Ocultar" : "Mostrar";
+
         this.togglePasswordButton.setAttribute(
             "aria-label",
-            isPassword ? "Hide password" : "Show password"
+            isPassword ? "Ocultar contraseña" : "Mostrar contraseña"
         );
     }
 
@@ -199,7 +202,7 @@ class RegisterForm {
         const email = this.emailInput.value.trim();
         const password = this.passwordInput.value;
 
-        this.formMessage.textContent = "Creating your account...";
+        this.formMessage.textContent = "Creando tu cuenta...";
         this.formMessage.className = "form-message";
 
         const { data, error } = await supabaseClient.auth.signUp({
@@ -213,15 +216,30 @@ class RegisterForm {
     });
 
         if (error) {
-           this.formMessage.textContent = error.message;
+            const errorMessages = {
+                user_already_exists:
+                    "Ya existe una cuenta con estos datos.",
+
+                email_exists:
+                    "Este correo electrónico ya está registrado.",
+
+                weak_password:
+                    "La contraseña no cumple los requisitos de seguridad."
+            };
+
+            this.formMessage.textContent =
+                errorMessages[error.code] ||
+                "No se pudo crear la cuenta. Inténtalo nuevamente.";
+
             this.formMessage.className = "form-message error";
             return;
         }
 
         console.log("Registered user:", data.user);
 
-        this.formMessage.textContent =
-            "Account created successfully!";
+        this.formMessage.textContent = data.session
+        ? "¡Cuenta creada correctamente! Ya puedes iniciar sesión."
+        : "¡Cuenta creada! Revisa tu correo electrónico para confirmar tu cuenta antes de iniciar sesión.";;
         this.formMessage.className = "form-message success";
 
         this.form.reset();

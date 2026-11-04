@@ -1,106 +1,74 @@
-# 💰 SpendWise
+# 💚 SpendWise
 
-### Personal Expense and Budget Management System
+### Mobile-First Personal Expense and Budget Manager
 
-**Current development version:** `v0.7.0` (Beta)  
-**Project status:** Core features working · Mobile First redesign in progress  
-**Academic project:** Object-Oriented Programming (OOP)
+SpendWise is a university software engineering project for recording small everyday expenses (often called *gastos hormiga*), managing monthly budgets, and understanding spending habits through useful statistics.
 
-SpendWise is a web application for recording, organizing, and analyzing everyday expenses. It helps users track spending by category, set monthly budgets, review past transactions, and better understand their financial habits.
+The application uses **vanilla JavaScript, HTML, CSS, and Supabase**. Its interface follows a **Mobile First** approach: the mobile layout is designed first, then adapted to larger screens.
 
-The project is built with **HTML, CSS, and vanilla JavaScript**, using **Supabase** for authentication and a PostgreSQL database. It is developed collaboratively with GitHub and Visual Studio Code, without a frontend framework.
+- **Current milestone:** `v0.8.0-beta.1` — November 2026 academic progress
+- **Development status:** functional academic beta; ongoing testing and polish
+- **Repository:** https://github.com/Oxmar99/SpendWise
 
-> **Team update:** SpendWise is no longer just a login/registration prototype. Its main expense, budget, and statistics features are connected to Supabase and working. The current focus is refining the mobile interface, testing edge cases, and preparing a desktop layout.
-
----
-
-## 📌 Current Status: v0.7.0 Beta
-
-### Working features
-
-- **Authentication:** User registration, login, session checks, and logout with Supabase Auth.
-- **Expense management:** Create, view, edit, and delete expenses; assign categories and dates.
-- **History:** Search and filter by description, category, and date range; apply and clear filters from a separate panel.
-- **Monthly budgets:** Set or update the current month's spending limit; view spent, remaining, and percentage used; display budget status messages.
-- **Statistics:** Monthly total, number of expenses, average per expense, comparison with the previous month, and spending breakdown by category.
-- **Historical reports:** Select a previous month to review statistics and budget history; editing past budgets is restricted in the interface.
-- **Navigation:** Home, History, Statistics, and Profile views.
-- **Mobile interface:** Mobile First layout, floating `+` button on Home/History/Statistics, expense form in a modal, and compact History cards with category icons and an actions menu (`⋮`).
-
-### Current focus
-
-1. Finish the Mobile First redesign, especially **Statistics** and **Profile**.
-2. Refine feedback messages, interactions, and layout details.
-3. Adapt the application to larger screens (tablet/desktop).
-4. Run broader functional, usability, and security checks before release.
-
-**Version note:** `v0.7.0` is the team's proposed development milestone. A Git tag/release should be created separately if the team wants it reflected in GitHub Releases.
+> SpendWise is an academic prototype. It is not yet a production-ready financial service.
 
 ---
 
-## 🎯 Project Objective
+## ✨ Implemented Features
 
-Develop an intuitive expense-management application that helps users record daily expenses, classify spending, manage monthly budgets, and review their habits through clear summaries and visual reports.
+| Module | Current capabilities | Status |
+|---|---|---|
+| Authentication | Email/password registration, login, client-side validation, Supabase Auth sessions, email confirmation support | ✅ Functional |
+| Home | Personalized welcome, monthly budget overview, spending summary, recent movements, financial reminder | ✅ Functional |
+| Expenses | Create, list, edit, and delete expenses; assign categories and dates | ✅ Functional |
+| Categories | Default and user-created categories stored in Supabase | ✅ Functional |
+| Expense History | Search by description, filter by category and date range, review filtered totals | ✅ Functional |
+| Budgets | Set a monthly limit, track used and remaining amounts, show progress and warnings | ✅ Functional |
+| Budget History | Review previous months' budgets, spending, remaining amount, and usage percentage | ✅ Functional |
+| Statistics | Month selector, total spent, transaction count, average, month-over-month comparison, circular chart, category ranking | ✅ Functional |
+| Navigation and Profile | Mobile bottom navigation (Home, History, Statistics, Profile), profile information, logout | ✅ Functional |
 
----
+### Statistics and Spending Analysis
 
-## ✨ Feature Checklist
+The **Análisis de hábitos** screen is designed for quick mobile reading:
 
-### Authentication
-- [x] Login and registration interfaces
-- [x] Client-side form validation
-- [x] User authentication with Supabase
-- [x] Session checks and logout
-- [ ] Password recovery
+- Select a month or return to the current month.
+- See the total spent, number of expenses, and average expense.
+- Compare the selected month's spending with the preceding month.
+- View a **donut chart** of spending distribution.
+- Read a **descending ranking of categories** with amounts and percentages.
 
-### Expenses and Categories
-- [x] Create, list, update, and delete expenses (CRUD)
-- [x] Assign a category and expense date
-- [x] Show recent expenses on Home
-- [x] Search and filter expense history
-- [x] Filter panel with Apply and Clear controls
-- [x] History cards with category icons and action menus
-- [ ] Manage custom categories directly from the interface
-
-### Budgets
-- [x] Create and update a monthly budget
-- [x] Display budget limit, spending, remaining balance, and progress
-- [x] Show in-app budget status/warning messages
-- [x] Review budget history
-- [x] Prevent editing older budgets through the current UI
-
-### Statistics
-- [x] Total spending for a selected month
-- [x] Expense count and average expense
-- [x] Compare spending with the previous month
-- [x] Spending breakdown chart by category
-- [x] Month selector for historical statistics
-- [ ] Final Mobile First visual redesign for Statistics
-
-### Interface and Quality
-- [x] Four-view navigation: Home, History, Statistics, Profile
-- [x] Expense form displayed in a modal
-- [x] Floating add-expense button hidden on Profile
-- [x] Compact history cards and contextual Edit/Delete menu
-- [ ] Finalize Profile design
-- [ ] Optimize tablet and desktop layouts
-- [ ] Polish confirmations, messages, accessibility, and mobile usability
-- [ ] Complete regression, security, and cross-device testing
+Statistics are calculated from the user's existing expense records; the chart does not require a separate reporting table.
 
 ---
 
-## 🛠️ Technologies
+## 📱 Design Approach
 
-| Technology | Purpose |
+- Mobile-first layouts and responsive styling.
+- Consistent green-and-neutral visual identity across login, registration, and dashboard.
+- Separate views for Home, History, Statistics, and Profile.
+- Compact financial summary cards and accessible form labels.
+- Floating quick-add button for expenses.
+- Interface text primarily in Spanish.
+
+The mobile redesign is substantially implemented. Desktop refinements and small usability details remain in progress.
+
+---
+
+## 🛠️ Technology Stack
+
+| Technology | Use |
 |---|---|
-| HTML5 | Page structure and accessible controls |
-| CSS3 | Styling and Mobile First responsive layout |
-| JavaScript (vanilla) | Application logic, DOM interactions, and OOP concepts |
-| Supabase Auth | Registration, login, and user sessions |
-| Supabase PostgreSQL | Persistent data for expenses, categories, budgets, and profiles |
-| Row Level Security (RLS) | Database access policies |
-| Git + GitHub | Version control, collaboration, and backups |
+| HTML5 | Structure and accessible form controls |
+| CSS3 | Mobile-first responsive layout and visual design |
+| JavaScript (no frontend framework) | UI behavior, validation, expense operations, and statistics |
+| Supabase Auth | Email/password authentication and sessions |
+| Supabase PostgreSQL | Persistent user, expense, category, and budget data |
+| Row Level Security (RLS) | Per-user access controls at the database level |
+| Git and GitHub | Version control and team collaboration |
 | Visual Studio Code | Development environment |
+
+Supabase JavaScript v2 is loaded through a CDN in the HTML pages.
 
 ---
 
@@ -108,72 +76,29 @@ Develop an intuitive expense-management application that helps users record dail
 
 ```text
 SpendWise/
-├── index.html           # Login screen
-├── register.html        # Registration screen
-├── dashboard.html       # Home, History, Statistics, Profile, and modals
-├── README.md            # Project status and team documentation
+├── index.html             # Login
+├── register.html          # Registration
+├── dashboard.html         # Main app (Home, History, Statistics, Profile)
+├── README.md
 ├── css/
-│   └── styles.css       # Shared styles and Mobile First layout
+│   └── styles.css         # Global and Mobile First styles
 └── js/
-    ├── app.js           # Login and authentication logic
-    ├── register.js      # Registration and validation logic
-    └── dashboard.js     # Sessions, expenses, budgets, reports, and UI logic
+    ├── app.js             # Login form and Supabase authentication
+    ├── register.js        # Registration form and validations
+    └── dashboard.js       # Expenses, categories, budgets, history, stats, navigation
 ```
 
-The current dashboard uses multiple views inside `dashboard.html`; they are switched by JavaScript rather than separate HTML pages.
+The exact structure may evolve as the project is refactored.
 
 ---
 
-## 🗃️ Supabase and Database
-
-SpendWise currently uses **one Supabase project** for backend services, separate from this GitHub repository.
-
-### Main database tables
-
-| Table | Role |
-|---|---|
-| `profiles` | User profile information |
-| `categories` | Expense categories |
-| `expenses` | User expense records |
-| `budgets` | Monthly spending limits |
-
-Authentication accounts are handled by **Supabase Auth**. Database tables have **Row Level Security (RLS)** enabled and corresponding policies configured. The application reads and writes data through the Supabase JavaScript client.
-
-**Important for teammates:** The Git repository contains the frontend source, but cloning it **does not create or replicate the Supabase database**, policies, or seeded categories. Anyone running the project needs access to a correctly configured backend (or a compatible development project).
-
-**Security reminders:**
-
-- Use only the project's **publishable/anon** key in browser-side code; **never** commit a `service_role`/secret key or a database password.
-- Keep RLS policies enabled and review them when modifying tables.
-- Coordinate SQL/schema changes with the team. A reproducible database setup or migrations should be documented before final delivery.
-- Do not store real passwords or other secrets in GitHub issues, commits, or screenshots.
-
----
-
-## 🧩 Object-Oriented Programming
-
-SpendWise is an academic OOP project developed in JavaScript.
-
-### Existing classes documented in the project
-
-- `LoginForm`: Login interactions, client-side validation, password visibility, and form events.
-- `RegisterForm`: Registration interactions and input/password validation.
-
-The dashboard currently also uses functions and event handlers for expenses, budgets, reports, and navigation. **Further refactoring into well-defined classes/modules remains a possible improvement** to demonstrate OOP principles more consistently across the application.
-
-Concepts emphasized by the project include classes and objects, encapsulation, input validation, CRUD operations, modularity, and integration with a persistent database.
-
----
-
-## 🚀 Running SpendWise Locally
+## 🚀 Running Locally
 
 ### Requirements
 
-- Git
-- Visual Studio Code (recommended)
 - A modern browser
-- Live Server extension or another local HTTP server (recommended)
-- A working Supabase project/configuration with the expected tables, categories, and policies
+- Visual Studio Code with **Live Server**, or another local HTTP server
+- Internet access to reach Supabase and the CDN
 
 ### Steps
 
@@ -184,91 +109,144 @@ Concepts emphasized by the project include classes and objects, encapsulation, i
    cd SpendWise
    ```
 
-2. Open the folder in VS Code.
-3. Check the Supabase URL and **publishable key** used by the JavaScript client. Coordinate configuration changes with the project owner; never replace the publishable key with a secret/service-role key.
-4. Start a local server (for example, VS Code **Live Server**) and open `index.html` through its local URL. Avoid relying on `file://` URLs for testing.
-5. Register or sign in with a test account. The dashboard should load your expenses, categories, budget, and reports from Supabase.
+2. Open the project folder in Visual Studio Code.
+3. Start Live Server from `index.html` (or serve the folder over HTTP).
+4. Register an account and confirm its email if required by the Supabase project's settings.
+5. Sign in and explore the application.
 
-**Troubleshooting:** If login or data loading fails, check the browser developer console, the Supabase configuration, authentication settings, RLS policies, and availability of seeded categories.
+**Important:** Do not launch the app through a `file://` URL. Use a local HTTP server to avoid browser restrictions that can affect scripts and requests.
 
-**No frontend build step is currently required:** The project uses HTML/CSS/JavaScript directly and loads Supabase JS through a CDN.
+### Supabase Configuration
+
+The existing scripts initialize Supabase with a **project URL** and a **publishable/anon key**. These are client-side configuration values, not service credentials.
+
+- The backend project and its data are managed outside this repository.
+- Never commit a `service_role` key or any secret API key.
+- Keep Supabase RLS policies enabled and verify them when adding or changing tables.
 
 ---
 
-## 👥 Team Collaboration
+## 🗄️ Database Overview
 
-To keep the working version stable:
+The current backend includes these Supabase tables:
 
-1. Pull the latest `main` before starting work (`git pull origin main`).
-2. Create a branch for each feature/fix (for example `feature/stats-ui` or `fix/expense-modal`).
-3. Make focused changes and test the affected features locally.
-4. Commit with a descriptive message, then push your branch.
-5. Open a Pull Request and ask a teammate to review before merging into `main`.
-6. Coordinate any Supabase database or policy changes explicitly; Git alone will not sync them.
+| Table | Purpose |
+|---|---|
+| `profiles` | Application user profile data |
+| `categories` | Default and customizable expense categories |
+| `expenses` | Recorded expenses with amount, category, date, and owner |
+| `budgets` | Monthly limits associated with a user and month |
 
-### Commit message examples
+RLS is enabled on the four application tables, with policies configured for authorized access. Supabase Auth manages authentication separately from these tables.
 
-```text
-feat: add category-based expense history
-fix: open expense modal when editing
-style: redesign history cards for mobile
-style: improve statistics screen
-security: review expense RLS policies
-docs: update README for v0.7.0
-```
+---
 
-### Regression checklist for UI changes
+## 🧩 Object-Oriented Programming
 
-Before merging, verify that:
+SpendWise applies OOP concepts in its authentication layer:
 
-- Registration, login, and logout still work.
-- Adding, editing, and deleting a test expense work.
-- Home totals, budget progress, and Statistics update after changes.
-- History filtering and the `⋮` actions menu work.
-- Expense and filter modals open/close correctly.
-- The `+` button is hidden on Profile, and other views still navigate correctly.
+- `LoginForm` encapsulates login form events, validation, feedback, and password visibility.
+- `RegisterForm` encapsulates registration validation, password confirmation, feedback, and form events.
+
+The current `dashboard.js` contains functions for data loading, rendering, navigation, and expense/budget operations. Refactoring these functions into additional classes or modules is a possible future improvement; the dashboard is **not** claimed to be fully object-oriented yet.
+
+---
+
+## ✅ Manual Verification Checklist
+
+Before submitting a new build, verify the following in a local browser:
+
+- [ ] Register a new user and complete email confirmation when applicable.
+- [ ] Log in and log out from Profile.
+- [ ] Create an expense, then edit and delete it.
+- [ ] Search and filter expenses; check the filtered total.
+- [ ] Set the current month's budget and verify the progress indicator.
+- [ ] Switch the Statistics month and verify all four summary values.
+- [ ] Confirm the donut chart and ranking match the recorded expenses.
+- [ ] Check a month with no expenses.
+- [ ] Verify that all four navigation views work on a mobile-sized screen.
+
+Some components have been manually tested during development; a complete automated test suite is not yet included.
 
 ---
 
 ## 🗺️ Development Roadmap
 
-| Phase | Status | Work |
-|---|---|---|
-| 1. Frontend foundation | ✅ Complete | Login, registration, validation, initial styles |
-| 2. Backend and database | ✅ Functional | Supabase Auth, tables, policies, connection |
-| 3. Expense management | ✅ Functional | Expense CRUD, categories, history, filters |
-| 4. Budgets and analytics | ✅ Functional | Monthly budgets, totals, comparisons, charts |
-| 5. Mobile First redesign | 🔄 In progress | Home and History updated; Statistics and Profile next |
-| 6. Final stabilization | ⏳ Pending | Desktop layout, polish, broader testing, documentation, presentation |
+### Phase 1 — Frontend and Authentication
+- [x] Login and registration forms
+- [x] Client-side validations
+- [x] Supabase authentication
+- [x] Mobile-first redesign of authentication screens
 
-### Next milestones (proposed)
+### Phase 2 — Backend and Database
+- [x] Supabase project and database schema
+- [x] `profiles`, `categories`, `expenses`, and `budgets` tables
+- [x] RLS policies
+- [x] Frontend-to-Supabase integration
 
-- **v0.8.0:** Redesign Statistics and Profile.
-- **v0.9.0:** Desktop responsiveness, UI refinements, and extensive testing.
-- **v1.0.0:** First stable academic release after verification and final documentation.
+### Phase 3 — Expense Management
+- [x] Expense CRUD
+- [x] Default and customizable categories
+- [x] Expense history, search, and filters
 
-These numbers are planning milestones, not a guarantee that all work is complete or released.
+### Phase 4 — Dashboard, Budgets, and Statistics
+- [x] Monthly budgets and progress
+- [x] Historical budgets
+- [x] Monthly statistics and period comparison
+- [x] Mobile-first navigation and dashboard views
+- [x] Donut chart and spending-category ranking
 
----
-
-## 📝 Recent Development Notes (v0.7.0)
-
-- Reorganized the dashboard around **Home, History, Statistics, and Profile** views.
-- Added an expense modal and corrected editing so existing expenses open with their saved values.
-- Connected Home's monthly spending total and recent movements to stored expense data.
-- Added a floating add-expense button, hidden on the Profile view.
-- Moved History filters to a separate overlay/panel.
-- Redesigned History entries with compact layouts, category icons, and a contextual `⋮` menu.
-- Preserved existing Supabase operations for expenses, budgets, authentication, and statistics during the redesign.
-
----
-
-## 📄 Academic Context
-
-SpendWise is being developed for a university Object-Oriented Programming course. The project provides hands-on experience in JavaScript, software organization, database integration, validation, CRUD workflows, responsive interfaces, version control, and collaborative development.
+### Phase 5 — Quality and Final Delivery
+- [ ] Complete end-to-end testing and edge-case checks
+- [ ] Implement password recovery
+- [ ] Polish Profile and remaining UI details
+- [ ] Improve tablet/desktop layouts
+- [ ] Review security and validation before public deployment
+- [ ] Prepare final demonstration and documentation
 
 ---
 
-## 📜 License / Usage
+## 🤝 Team Workflow
 
-This project is currently intended for academic use. No separate open-source license has been declared in this README.
+Use focused branches such as `feature/statistics`, `feature/budget-history`, or `fix/mobile-layout` when collaborating.
+
+Prefer Conventional Commits:
+
+```text
+feat: add category spending analysis
+style: polish mobile-first interface
+fix: correct expense validation
+docs: update project status and setup instructions
+```
+
+Suggested workflow:
+
+1. Pull the latest changes before starting.
+2. Implement and test one focused change.
+3. Inspect `git status` and `git diff`.
+4. Commit only the intended files.
+5. Push your branch and open a Pull Request when working collaboratively.
+
+---
+
+## 📝 Current Milestone — v0.8.0-beta.1
+
+This milestone builds on the earlier Mobile First work and adds:
+
+- Consistent login and registration presentation.
+- Cleaner dashboard header, with the welcome message displayed on Home.
+- Updated Statistics screen with a month selector and compact summary cards.
+- Circular category distribution chart and sorted spending ranking.
+- Updated project documentation for the academic progress delivery.
+
+**Still pending:** password recovery, complete QA, final desktop polish, and production deployment.
+
+---
+
+## 🎓 Academic Context
+
+SpendWise is developed for a university **Object-Oriented Programming** course. The project demonstrates form validation, classes and objects, database integration, CRUD operations, responsive interfaces, collaboration, and version control.
+
+## 📜 License
+
+Academic project. No open-source license has been specified yet.

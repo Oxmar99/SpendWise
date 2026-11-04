@@ -231,18 +231,16 @@
         <section id="statsView" class="app-view" hidden>
 
             <div class="view-heading">
-                <h2>Estadísticas</h2>
-                <p>Conoce cómo se comportan tus gastos.</p>
+                <h2>Análisis de hábitos</h2>
+                <p>Descubre en qué se va tu dinero.</p>
             </div>
 
             <section class="dashboard-analytics">
 
-                <h2>Resumen del mes</h2>
-
                 <div class="history-filter">
 
                     <label for="historyMonth">
-                        Consultar otro mes:
+                        Periodo de análisis
                     </label>
 
                     <input type="month" id="historyMonth">
@@ -253,11 +251,12 @@
 
                 </div>
 
+                <h3 class="stats-section-title">Tu mes en números</h3>
 
                 <div class="analytics-grid">
 
                     <article class="analytics-card">
-                        <p>Total gastado este mes</p>
+                        <p>Total gastado</p>
                         <h3 id="monthlyTotal">$0.00</h3>
                     </article>
 
@@ -272,7 +271,7 @@
                     </article>
 
                     <article class="analytics-card">
-                        <p>Comparación con el mes anterior</p>
+                        <p>Frente al mes anterior</p>
                         <h3 id="monthlyComparison">Sin datos</h3>
                         <p id="monthlyComparisonMessage">
                             Comparando tus gastos mensuales.
@@ -284,11 +283,11 @@
 
                 <div class="category-chart-section">
 
-                    <h2>Gastos por categoría</h2>
+                    <h2>¿En qué gastaste?</h2>
 
-                    <p>Distribución de tus gastos durante el mes.</p>
+                    <p>Distribución y ranking de tus categorías.</p>
 
-                    <div id="categoryChart" aria-live="polite">
+                    <div id="categoryChart" aria-live="polite" aria-atomic="true">
                         <p>Cargando estadísticas...</p>
                     </div>
 

@@ -48,7 +48,7 @@ class LoginForm {
             this.showFieldError(
                 this.emailInput,
                 this.emailError,
-                "Please enter your email address."
+                "Ingresa tu correo electrónico."
             );
             return false;
         }
@@ -59,7 +59,7 @@ class LoginForm {
             this.showFieldError(
                 this.emailInput,
                 this.emailError,
-                "Please enter a valid email address."
+                "Ingresa un correo electrónico válido."
             );
             return false;
         }
@@ -74,7 +74,7 @@ class LoginForm {
             this.showFieldError(
                 this.passwordInput,
                 this.passwordError,
-                "Please enter your password."
+                "Ingresa tu contraseña."
             );
             return false;
         }
@@ -83,7 +83,7 @@ class LoginForm {
             this.showFieldError(
                 this.passwordInput,
                 this.passwordError,
-                "Password must contain at least 6 characters."
+                "La contraseña debe tener al menos 6 caracteres."
             );
             return false;
         }
@@ -107,10 +107,13 @@ class LoginForm {
         const isPassword = this.passwordInput.type === "password";
 
         this.passwordInput.type = isPassword ? "text" : "password";
-        this.togglePasswordButton.textContent = isPassword ? "Hide" : "Show";
+
+        this.togglePasswordButton.textContent =
+            isPassword ? "Ocultar" : "Mostrar";
+
         this.togglePasswordButton.setAttribute(
             "aria-label",
-            isPassword ? "Hide password" : "Show password"
+            isPassword ? "Ocultar contraseña" : "Mostrar contraseña"
         );
     }
 
@@ -126,7 +129,7 @@ class LoginForm {
         const email = this.emailInput.value.trim();
         const password = this.passwordInput.value;
 
-        this.formMessage.textContent = "Signing in...";
+        this.formMessage.textContent = "Iniciando sesión...";
         this.formMessage.className = "form-message";
 
         const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -135,12 +138,23 @@ class LoginForm {
         });
 
         if (error) {
-          this.formMessage.textContent = error.message;
-          this.formMessage.className = "form-message error";
-          return;
+            const errorMessages = {
+                invalid_credentials:
+                    "Correo electrónico o contraseña incorrectos.",
+
+                email_not_confirmed:
+                    "Debes confirmar tu correo electrónico antes de iniciar sesión."
+            };
+
+            this.formMessage.textContent =
+                errorMessages[error.code] ||
+                "No se pudo iniciar sesión. Inténtalo nuevamente.";
+
+            this.formMessage.className = "form-message error";
+            return;
         }
 
-        this.formMessage.textContent = "Login successful!";
+        this.formMessage.textContent = "¡Inicio de sesión exitoso!";
         this.formMessage.className = "form-message success";
 
         console.log("Logged in user:", data.user);
