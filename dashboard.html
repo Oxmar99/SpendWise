@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#f5f7f6">
     <title>SpendWise | Panel principal</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chat.css">
 </head>
 
 <body>
@@ -424,6 +425,125 @@
         </button>
 
 
+        <!-- =====================================
+            SPENDWISE ASSISTANT
+            Chat de ayuda
+        ===================================== -->
+
+        <!-- Botón flotante del asistente -->
+        <button
+            type="button"
+            id="chatToggleButton"
+            class="chat-toggle-button"
+            aria-label="Abrir asistente de SpendWise"
+            aria-controls="chatPanel"
+            aria-expanded="false"
+        >
+            💬
+        </button>
+
+        <!-- Ventana de conversación -->
+        <section
+            id="chatPanel"
+            class="chat-panel"
+            role="dialog"
+            aria-labelledby="chatPanelTitle"
+            hidden
+        >
+
+            <!-- Encabezado -->
+            <header class="chat-header">
+
+                <div class="chat-header-info">
+                    <span class="chat-avatar">🤖</span>
+
+                    <div>
+                        <h2 id="chatPanelTitle">
+                            SpendWise Assistant
+                        </h2>
+
+                        <p>Asistente de ayuda</p>
+                    </div>
+                </div>
+
+                <!-- Controles del asistente -->
+                <div class="chat-header-actions">
+
+                    <!-- Nueva conversación -->
+                    <button
+                        type="button"
+                        id="chatResetButton"
+                        class="chat-reset-button"
+                        aria-label="Iniciar nueva conversación"
+                        title="Nueva conversación"
+                    >
+                        ↻
+                    </button>
+
+                    <!-- Cerrar asistente -->
+                    <button
+                        type="button"
+                        id="chatCloseButton"
+                        class="chat-close-button"
+                        aria-label="Cerrar asistente"
+                    >
+                        ✕
+                    </button>
+
+                </div>
+
+            </header>
+
+            <!-- Área de mensajes -->
+            <div
+                id="chatMessages"
+                class="chat-messages"
+                role="log"
+                aria-live="polite"
+            >
+
+                <div class="chat-message bot-message">
+                    ¡Hola! 👋 Soy el asistente de SpendWise.
+                    Estoy aquí para ayudarte a utilizar
+                    la aplicación.
+                </div>
+
+            </div>
+
+            <!-- Preguntas frecuentes -->
+            <div
+                id="chatQuickReplies"
+                class="chat-quick-replies"
+                aria-label="Preguntas frecuentes"
+            ></div>
+
+            <!-- Área para escribir mensajes -->
+            <form id="chatForm" class="chat-input-area">
+
+                <label for="chatInput" class="chat-input-label">
+                    Escribe tu mensaje
+                </label>
+
+                <input
+                    type="text"
+                    id="chatInput"
+                    placeholder="Escribe tu pregunta..."
+                    maxlength="300"
+                    autocomplete="off"
+                >
+
+                <button
+                    type="submit"
+                    id="chatSendButton"
+                >
+                    Enviar
+                </button>
+
+            </form>
+
+        </section>
+
+
         <!-- NAVEGACIÓN INFERIOR -->
         <nav class="bottom-navigation" aria-label="Navegación principal">
 
@@ -454,6 +574,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/dashboard.js"></script>
+    <script src="js/support-chat.js"></script>
 
 </body>
 </html>
