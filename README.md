@@ -6,7 +6,7 @@ SpendWise is a university software engineering project for recording small every
 
 The application uses **vanilla JavaScript, HTML, CSS, and Supabase**. Its interface follows a **Mobile First** approach: the mobile layout is designed first, then adapted to larger screens.
 
-- **Current milestone:** `v0.8.0-beta.1` — November 2026 academic progress
+- **Current development milestone:** `v0.9.0-beta.1` — SpendWise Assistant integration (November 2026; version label, not a Git release tag)
 - **Development status:** functional academic beta; ongoing testing and polish
 - **Repository:** https://github.com/Oxmar99/SpendWise
 
@@ -27,6 +27,7 @@ The application uses **vanilla JavaScript, HTML, CSS, and Supabase**. Its interf
 | Budget History | Review previous months' budgets, spending, remaining amount, and usage percentage | ✅ Functional |
 | Statistics | Month selector, total spent, transaction count, average, month-over-month comparison, circular chart, category ranking | ✅ Functional |
 | Navigation and Profile | Mobile bottom navigation (Home, History, Statistics, Profile), profile information, logout | ✅ Functional |
+| SpendWise Assistant | Floating support chat, predefined answers, quick questions, contextual navigation, guided troubleshooting, and conversation reset | ✅ Functional |
 
 ### Statistics and Spending Analysis
 
@@ -40,6 +41,20 @@ The **Análisis de hábitos** screen is designed for quick mobile reading:
 
 Statistics are calculated from the user's existing expense records; the chart does not require a separate reporting table.
 
+### SpendWise Assistant — In-App Help Chat
+
+**SpendWise Assistant** is a rule-based conversational help module, available from the authenticated dashboard. Its floating chat button sits on the lower-left side of the interface, separate from the expense quick-add button.
+
+Users can:
+
+- Write a question or choose a suggested question about expenses, budgets, history, categories, and statistics.
+- Read predefined help replies displayed as chat messages.
+- Follow context-sensitive action buttons to open the relevant app view or expense form.
+- Get guided checks for common issues, including expenses or budgets not saving, missing movements, and unexpected statistics.
+- Reset the visible conversation, close the chat, or reopen it later during the same page session.
+
+**Scope and limitations:** The assistant does not use generative AI, a human support operator, or a real-time messaging backend. It recognizes supported words and phrases, so questions outside its rules receive a fallback response. Messages live only in the current page and disappear after a reload. The chat is not yet accessible from the login and registration screens, and it does not submit support tickets. No new Supabase table or API key is required for this module.
+
 ---
 
 ## 📱 Design Approach
@@ -49,6 +64,7 @@ Statistics are calculated from the user's existing expense records; the chart do
 - Separate views for Home, History, Statistics, and Profile.
 - Compact financial summary cards and accessible form labels.
 - Floating quick-add button for expenses.
+- Floating support-chat window designed for small mobile screens, with a separate reset and close control.
 - Interface text primarily in Spanish.
 
 The mobile redesign is substantially implemented. Desktop refinements and small usability details remain in progress.
@@ -61,7 +77,7 @@ The mobile redesign is substantially implemented. Desktop refinements and small 
 |---|---|
 | HTML5 | Structure and accessible form controls |
 | CSS3 | Mobile-first responsive layout and visual design |
-| JavaScript (no frontend framework) | UI behavior, validation, expense operations, and statistics |
+| JavaScript (no frontend framework) | UI behavior, validation, expense operations, statistics, and rule-based support chat |
 | Supabase Auth | Email/password authentication and sessions |
 | Supabase PostgreSQL | Persistent user, expense, category, and budget data |
 | Row Level Security (RLS) | Per-user access controls at the database level |
@@ -81,11 +97,13 @@ SpendWise/
 ├── dashboard.html         # Main app (Home, History, Statistics, Profile)
 ├── README.md
 ├── css/
-│   └── styles.css         # Global and Mobile First styles
+│   ├── styles.css         # Global and Mobile First styles
+│   └── chat.css           # SpendWise Assistant responsive styles
 └── js/
     ├── app.js             # Login form and Supabase authentication
     ├── register.js        # Registration form and validations
-    └── dashboard.js       # Expenses, categories, budgets, history, stats, navigation
+    ├── dashboard.js       # Expenses, categories, budgets, history, stats, navigation
+    └── support-chat.js    # SupportChat class, chatbot rules, and UI events
 ```
 
 The exact structure may evolve as the project is refactored.
@@ -147,8 +165,11 @@ SpendWise applies OOP concepts in its authentication layer:
 
 - `LoginForm` encapsulates login form events, validation, feedback, and password visibility.
 - `RegisterForm` encapsulates registration validation, password confirmation, feedback, and form events.
+- `SupportChat` encapsulates the help-chat interface, message handling, quick questions, troubleshooting responses, and suggested navigation actions. Its methods include `setupEvents()`, `sendQuestion()`, `addMessage()`, `getAnswer()`, `getSupportAnswer()`, `getSuggestedAction()`, and `resetChat()`.
 
-The current `dashboard.js` contains functions for data loading, rendering, navigation, and expense/budget operations. Refactoring these functions into additional classes or modules is a possible future improvement; the dashboard is **not** claimed to be fully object-oriented yet.
+The assistant is instantiated once when the dashboard page loads. It reuses existing navigation and expense buttons rather than duplicating their business logic.
+
+The current `dashboard.js` still contains functions for data loading, rendering, navigation, and expense/budget operations. Refactoring these functions into additional classes or modules is a possible future improvement; the dashboard is **not** claimed to be fully object-oriented yet.
 
 ---
 
@@ -165,8 +186,15 @@ Before submitting a new build, verify the following in a local browser:
 - [ ] Confirm the donut chart and ranking match the recorded expenses.
 - [ ] Check a month with no expenses.
 - [ ] Verify that all four navigation views work on a mobile-sized screen.
+- [ ] Open and close SpendWise Assistant using the chat button, the close control, and Escape.
+- [ ] Send a typed question and use the quick-question buttons.
+- [ ] Verify expected answers, unknown-question fallback, and guided troubleshooting.
+- [ ] Follow assistant action buttons to History, Statistics, Home, and the expense form.
+- [ ] Reset the conversation and confirm the welcome message returns without affecting expense data.
+- [ ] Inspect the chat layout at 320 × 568, 390 × 844, and 1280 × 800 viewport sizes.
+- [ ] On a real phone, check that the on-screen keyboard does not hide the chat input.
 
-Some components have been manually tested during development; a complete automated test suite is not yet included.
+The assistant's core behaviors and responsive previews were manually checked during development. The checklist remains useful for regressions; real-device keyboard behavior and a complete automated test suite have not yet been verified.
 
 ---
 
@@ -196,7 +224,16 @@ Some components have been manually tested during development; a complete automat
 - [x] Mobile-first navigation and dashboard views
 - [x] Donut chart and spending-category ranking
 
-### Phase 5 — Quality and Final Delivery
+### Phase 5 — SpendWise Assistant
+- [x] Floating mobile-friendly chat window
+- [x] Rule-based replies and quick questions
+- [x] Contextual navigation to existing app functions
+- [x] Guided help for common in-app problems
+- [x] Conversation reset and accessibility controls
+- [ ] Optional help entry point from login and registration
+- [ ] Optional support-ticket or contact channel if required for final delivery
+
+### Phase 6 — Quality and Final Delivery
 - [ ] Complete end-to-end testing and edge-case checks
 - [ ] Implement password recovery
 - [ ] Polish Profile and remaining UI details
@@ -214,6 +251,7 @@ Prefer Conventional Commits:
 
 ```text
 feat: add category spending analysis
+feat(chat): integrate SpendWise Assistant
 style: polish mobile-first interface
 fix: correct expense validation
 docs: update project status and setup instructions
@@ -229,17 +267,17 @@ Suggested workflow:
 
 ---
 
-## 📝 Current Milestone — v0.8.0-beta.1
+## 📝 Current Development Milestone — v0.9.0-beta.1
 
-This milestone builds on the earlier Mobile First work and adds:
+This working milestone builds on `v0.8.0-beta.1` and adds:
 
-- Consistent login and registration presentation.
-- Cleaner dashboard header, with the welcome message displayed on Home.
-- Updated Statistics screen with a month selector and compact summary cards.
-- Circular category distribution chart and sorted spending ranking.
-- Updated project documentation for the academic progress delivery.
+- SpendWise Assistant, a standalone JavaScript class integrated into the dashboard.
+- Automatic chat replies for frequent app questions and troubleshooting requests.
+- Quick-question controls, conversation reset, and buttons that navigate to existing functionality.
+- A responsive support-chat presentation tested in three browser viewport sizes.
+- Updated documentation covering the assistant's capabilities and limitations.
 
-**Still pending:** password recovery, complete QA, final desktop polish, and production deployment.
+**Still pending:** password recovery, complete QA (including real-phone keyboard behavior), final desktop polish, and production deployment. Optional contact/support-ticket functionality has not been implemented.
 
 ---
 
