@@ -23,6 +23,8 @@ const budgetPercentage = document.getElementById("budgetPercentage");
 const budgetMessage = document.getElementById("budgetMessage");
 const saveBudgetButton = document.getElementById("saveBudgetButton");
 
+let budgetSuccessTimeout;
+
 let currentBudget = null;
 const welcomeMessage = document.getElementById("welcomeMessage");
 const saveExpenseButton = document.getElementById("saveExpenseButton");
@@ -379,6 +381,8 @@ function renderCategoryChart(currentExpenses, currentTotal) {
 
 budgetForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    // Cancelar cualquier temporizador anterior
+    clearTimeout(budgetSuccessTimeout);
 
     if (!currentUser) {
         budgetMessage.textContent =
@@ -452,10 +456,22 @@ budgetForm.addEventListener("submit", async (event) => {
 
         renderBudget();
 
-        budgetMessage.textContent =
+        // Mostrar confirmación de guardado
+        const successText =
             "¡Presupuesto mensual guardado correctamente!";
 
+        budgetMessage.textContent = successText;
         budgetMessage.style.color = "#238636";
+
+        // Ocultar confirmación después de 4 segundos
+        budgetSuccessTimeout = setTimeout(() => {
+
+            // Evitar borrar otros mensajes importantes
+            if (budgetMessage.textContent === successText) {
+                budgetMessage.textContent = "";
+            }
+
+        }, 4000);
 
     } catch (error) {
         console.error("Error al guardar el presupuesto:", error);
@@ -1216,6 +1232,21 @@ navigationItems.forEach(item => {
     });
 });
 
+// ======================================
+// ACCESO AL PERFIL DESDE EL ENCABEZADO
+// ======================================
+
+const headerProfileButton =
+    document.getElementById("headerProfileButton");
+
+if (headerProfileButton) {
+
+    headerProfileButton.addEventListener("click", () => {
+        showView("profileView");
+    });
+
+}
+
 // Botones que llevan a otras secciones
 document.querySelectorAll("[data-go]").forEach(button => {
     button.addEventListener("click", () => {
@@ -1255,6 +1286,21 @@ expenseModal.addEventListener("click", event => {
     if (event.target === expenseModal) {
         closeExpenseModalWindow();
     }
+});
+
+// ======================================
+// CERRAR FORMULARIO CON ESCAPE
+// ======================================
+
+document.addEventListener("keydown", (event) => {
+
+    if (
+        event.key === "Escape" &&
+        !expenseModal.hidden
+    ) {
+        closeExpenseModalWindow();
+    }
+
 });
 
 // ======================================
