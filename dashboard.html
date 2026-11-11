@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#f5f7f6">
     <title>SpendWise | Panel principal</title>
+
+    <link rel="icon" type="image/png" href="assets/img/spendwise-app-icon.png">
+
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/chat.css">
 </head>
@@ -16,17 +19,46 @@
 
         <!-- ENCABEZADO -->
         <header class="dashboard-header">
+
             <div class="dashboard-brand">
-                <div class="brand-icon">S</div>
-                <div>
+
+                <!-- Logotipo y nombre -->
+                <div class="dashboard-brand-row">
+
+                    <img
+                        src="assets/img/spendwise-logo.png"
+                        alt=""
+                        class="brand-icon dashboard-logo-image"
+                        width="40"
+                        height="40"
+                    >
+
                     <h1>SpendWise</h1>
-                    <p id="welcomeMessage">¡Bienvenido!</p>
+
                 </div>
+
+                <!-- Bienvenida -->
+                <p id="welcomeMessage">
+                    ¡Bienvenido!
+                </p>
+
             </div>
 
+            <!-- ACCESO RÁPIDO AL PERFIL -->
+            <button
+                type="button"
+                id="headerProfileButton"
+                aria-label="Abrir mi perfil"
+                title="Mi perfil"
+            >
+                <span aria-hidden="true">👤</span>
+            </button>
+
+            <!-- Se conserva para la función de cierre de sesión -->
             <button id="logoutButton" type="button">
                 Cerrar sesión
             </button>
+
         </header>
 
 
@@ -314,30 +346,157 @@
 
         </section>
 
+        
+        <!-- =====================================
+            VISTA: PERFIL
+        ===================================== -->
 
-        <!-- VISTA: PERFIL -->
         <section id="profileView" class="app-view" hidden>
 
             <div class="view-heading">
                 <h2>Mi perfil</h2>
-                <p>Tu cuenta de SpendWise.</p>
+                <p>Tu espacio personal en SpendWise.</p>
             </div>
 
-            <section class="profile-card">
-                <div class="profile-avatar">👤</div>
+            <!-- TARJETA DEL USUARIO -->
+            <section class="profile-hero">
 
-                <h3 id="profileName">Usuario SpendWise</h3>
+                <div class="profile-avatar" aria-hidden="true">
+                    👤
+                </div>
 
-                <p id="profileEmail">
-                    Información de tu cuenta.
-                </p>
+                <div class="profile-user">
+                    <span class="profile-kicker">
+                        CUENTA PERSONAL
+                    </span>
 
-                <button id="profileLogoutButton" type="button">
-                    Cerrar sesión
-                </button>
+                    <h3 id="profileName">
+                        Usuario SpendWise
+                    </h3>
+
+                    <p id="profileEmail">
+                        Información de tu cuenta.
+                    </p>
+                </div>
+
             </section>
 
+
+            <!-- CONFIGURACIÓN -->
+            <section
+                class="profile-block"
+                aria-labelledby="profileSettingsTitle"
+            >
+
+                <h3 id="profileSettingsTitle" class="profile-block-title">
+                    Configuración
+                </h3>
+
+                <ul class="profile-option-list">
+
+                    <li class="profile-option">
+
+                        <span class="profile-option-icon" aria-hidden="true">
+                            👤
+                        </span>
+
+                        <div class="profile-option-copy">
+                            <strong>Datos personales</strong>
+                            <small>Información de tu cuenta</small>
+                        </div>
+
+                        <span class="profile-status">
+                            Próximamente
+                        </span>
+
+                    </li>
+
+
+                    <li class="profile-option">
+
+                        <span class="profile-option-icon" aria-hidden="true">
+                            🛡️
+                        </span>
+
+                        <div class="profile-option-copy">
+                            <strong>Privacidad y seguridad</strong>
+                            <small>Protección de tu cuenta</small>
+                        </div>
+
+                        <span class="profile-status">
+                            Próximamente
+                        </span>
+
+                    </li>
+
+
+                    <li class="profile-option">
+
+                        <span class="profile-option-icon" aria-hidden="true">
+                            🎨
+                        </span>
+
+                        <div class="profile-option-copy">
+                            <strong>Preferencias</strong>
+                            <small>Personalización de la aplicación</small>
+                        </div>
+
+                        <span class="profile-status">
+                            Próximamente
+                        </span>
+
+                    </li>
+
+                </ul>
+
+            </section>
+
+
+            <!-- INFORMACIÓN -->
+            <section
+                class="profile-block"
+                aria-labelledby="profileAboutTitle"
+            >
+
+                <h3 id="profileAboutTitle" class="profile-block-title">
+                    Información
+                </h3>
+
+                <div class="profile-info-card">
+
+                    <span class="profile-option-icon" aria-hidden="true">
+                        💚
+                    </span>
+
+                    <div class="profile-option-copy">
+                        <strong>Acerca de SpendWise</strong>
+                        <small>Proyecto académico · Versión beta</small>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CIERRE DE SESIÓN -->
+            <div class="profile-session-area">
+
+                <button
+                    id="profileLogoutButton"
+                    type="button"
+                >
+                    <span aria-hidden="true">↪</span>
+                    Cerrar sesión
+                </button>
+
+                <p class="profile-footer-text">
+                    SpendWise · Tu dinero, bajo control
+                </p>
+
+            </div>
+
         </section>
+
 
 
         <!-- FORMULARIO DE GASTOS -->

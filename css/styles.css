@@ -2390,3 +2390,788 @@ body:has(#homeView:not([hidden])) #welcomeMessage {
         align-items: center;
     }
 }
+
+
+/* =====================================
+   SPENDWISE - PERFIL MOBILE FIRST
+===================================== */
+
+#profileView {
+    padding-bottom: 35px;
+}
+
+#profileView .view-heading {
+    margin-bottom: 20px;
+}
+
+
+/* TARJETA PRINCIPAL */
+
+#profileView .profile-hero {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 22px 18px;
+
+    background: linear-gradient(
+        135deg,
+        #1f6f5c,
+        #185747
+    );
+
+    border-radius: 22px;
+
+    box-shadow: 0 10px 28px rgba(31, 111, 92, 0.17);
+}
+
+#profileView .profile-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 60px;
+
+    height: 60px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+
+    font-size: 30px;
+}
+
+#profileView .profile-user {
+    flex: 1;
+    min-width: 0;
+}
+
+#profileView .profile-kicker {
+    display: block;
+
+    color: #cde8dd;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+#profileView .profile-hero h3 {
+    margin: 6px 0;
+
+    color: white;
+
+    font-size: 17px;
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+}
+
+#profileView .profile-hero p {
+    margin: 0;
+
+    color: #e1f0e9;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* BLOQUES DE CONFIGURACIÓN */
+
+#profileView .profile-block {
+    margin-top: 25px;
+}
+
+#profileView .profile-block-title {
+    margin: 0 0 12px 5px;
+
+    color: #63716c;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* LISTA DE OPCIONES */
+
+#profileView .profile-option-list {
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+
+    background: white;
+
+    border: 1px solid #e6eeea;
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+#profileView .profile-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 16px;
+
+    border-bottom: 1px solid #edf2ef;
+}
+
+#profileView .profile-option:last-child {
+    border-bottom: none;
+}
+
+#profileView .profile-option-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 40px;
+
+    height: 40px;
+
+    background: #e8f3ef;
+
+    border-radius: 13px;
+
+    font-size: 20px;
+}
+
+#profileView .profile-option-copy {
+    flex: 1;
+    min-width: 0;
+}
+
+#profileView .profile-option-copy strong {
+    display: block;
+
+    color: #17221f;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin-bottom: 4px;
+}
+
+#profileView .profile-option-copy small {
+    display: block;
+
+    color: #8b9792;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+#profileView .profile-status {
+    flex-shrink: 0;
+
+    padding: 6px 9px;
+
+    background: #f0f3f2;
+    color: #788780;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* TARJETA DE INFORMACIÓN */
+
+#profileView .profile-info-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 16px;
+
+    background: white;
+
+    border: 1px solid #e6eeea;
+    border-radius: 20px;
+}
+
+
+/* CIERRE DE SESIÓN */
+
+#profileView .profile-session-area {
+    margin-top: 28px;
+}
+
+#profileLogoutButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    width: 100%;
+
+    padding: 16px;
+
+    background: white;
+    color: #b94646;
+
+    border: 1px solid #ecc9c9;
+    border-radius: 16px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+#profileLogoutButton:hover {
+    background: #fff5f5;
+}
+
+#profileLogoutButton:focus-visible {
+    outline: 2px solid #b94646;
+    outline-offset: 3px;
+}
+
+#profileView .profile-footer-text {
+    margin-top: 18px;
+
+    color: #8b9792;
+
+    font-size: 12px;
+    text-align: center;
+}
+
+
+/* PANTALLAS PEQUEÑAS */
+
+@media (max-width: 380px) {
+
+    #profileView .profile-hero {
+        padding: 18px 14px;
+    }
+
+    #profileView .profile-avatar {
+        flex-basis: 52px;
+        height: 52px;
+        font-size: 26px;
+    }
+
+    #profileView .profile-option {
+        gap: 10px;
+        padding: 14px 12px;
+        flex-wrap: wrap;
+    }
+
+    #profileView .profile-status {
+        margin-left: 50px;
+    }
+
+}
+
+/* =====================================
+   SPENDWISE - ÚLTIMOS MOVIMIENTOS
+   Ajustes visuales
+===================================== */
+
+/* Encabezado de últimos movimientos */
+
+#homeView .recent-expenses-section .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+#homeView .recent-expenses-section .section-heading h2 {
+    margin: 0;
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+/* Botón Ver todos */
+
+#homeView .recent-expenses-section [data-go="historyView"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    margin-left: auto;
+    padding: 9px 13px;
+
+    background: #e8f3ef;
+    color: #1f6f5c;
+
+    border: 1px solid #d5e8df;
+    border-radius: 20px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition: background 0.2s ease;
+}
+
+#homeView .recent-expenses-section [data-go="historyView"]:hover {
+    background: #d7ebe2;
+}
+
+#homeView .recent-expenses-section [data-go="historyView"]:focus-visible {
+    outline: 2px solid #1f6f5c;
+    outline-offset: 3px;
+}
+
+/* Flecha decorativa */
+
+#homeView .recent-expenses-section [data-go="historyView"]::after {
+    content: "→";
+    font-size: 16px;
+}
+
+
+/* TARJETAS DE MOVIMIENTOS */
+
+#recentExpenses .expense-item {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto;
+
+    align-items: center;
+
+    column-gap: 12px;
+    row-gap: 3px;
+
+    padding: 16px;
+
+    background: white;
+
+    border: 1px solid #e6eeea;
+    border-radius: 16px;
+}
+
+/* Nombre del gasto */
+
+#recentExpenses .expense-item h3 {
+    grid-column: 1;
+    grid-row: 1;
+
+    margin: 0 0 3px;
+
+    color: #17221f;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    overflow-wrap: anywhere;
+}
+
+/* Categoría */
+
+#recentExpenses .expense-item p:first-of-type {
+    grid-column: 1;
+    grid-row: 2;
+
+    margin: 0;
+
+    color: #63716c;
+    font-size: 12px;
+}
+
+/* Fecha */
+
+#recentExpenses .expense-item p:nth-of-type(2) {
+    grid-column: 1;
+    grid-row: 3;
+
+    margin: 0;
+
+    color: #8b9792;
+    font-size: 12px;
+}
+
+/* Monto del gasto */
+
+#recentExpenses .expense-item strong {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+
+    justify-self: end;
+    align-self: center;
+
+    margin: 0;
+    padding: 9px 11px;
+
+    background: #e8f3ef;
+    color: #1f6f5c;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+/* =====================================
+   SPENDWISE - FORMULARIO DE GASTOS
+   Encabezado y botón de cierre
+===================================== */
+
+/* Encabezado del formulario */
+
+#expenseModal .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* Título */
+
+#expenseModal .section-heading h2 {
+    margin: 0;
+
+    color: #17221f;
+
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* Botón cerrar */
+
+#closeExpenseModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 38px;
+
+    width: 38px;
+    height: 38px;
+
+    padding: 0;
+
+    background: #f0f4f2;
+    color: #52665d;
+
+    border: none;
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+#closeExpenseModal:hover {
+    background: #e1ebe6;
+    color: #1f6f5c;
+}
+
+#closeExpenseModal:focus-visible {
+    outline: 2px solid #1f6f5c;
+    outline-offset: 3px;
+}
+
+/* =====================================
+   AJUSTE RESPONSIVE - ÚLTIMOS MOVIMIENTOS
+===================================== */
+
+#homeView .recent-expenses-section .section-heading {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) max-content;
+
+    align-items: center;
+    gap: 8px;
+}
+
+#homeView .recent-expenses-section .section-heading h2 {
+    font-size: 17px;
+    line-height: 1.2;
+
+    margin: 0;
+    min-width: 0;
+}
+
+#homeView .recent-expenses-section [data-go="historyView"] {
+    margin-left: 0;
+
+    padding: 8px 10px;
+
+    font-size: 11px;
+    gap: 4px;
+}
+
+#homeView .recent-expenses-section [data-go="historyView"]::after {
+    font-size: 14px;
+}
+
+
+/* Pantallas especialmente pequeñas */
+
+@media (max-width: 380px) {
+
+    #homeView .recent-expenses-section .section-heading h2 {
+        font-size: 15px;
+    }
+
+    #homeView .recent-expenses-section [data-go="historyView"] {
+        padding: 7px 8px;
+        font-size: 10px;
+    }
+
+}
+
+/* =====================================
+   SPENDWISE - ENCABEZADO MOBILE FIRST
+===================================== */
+
+body:has(.app-view) .dashboard-header {
+    display: flex;
+    flex-direction: row;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+/* Marca de SpendWise */
+
+body:has(.app-view) .dashboard-brand {
+    display: flex;
+    align-items: flex-start;
+
+    flex: 1;
+    min-width: 0;
+
+    gap: 12px;
+}
+
+body:has(.app-view) .dashboard-brand > div:last-child {
+    min-width: 0;
+}
+
+/* Logotipo S */
+
+body:has(.app-view) .dashboard-header .brand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 40px;
+
+    width: 40px;
+    height: 40px;
+
+    background: #e8f3ef;
+    color: #1f6f5c;
+
+    border: none;
+    border-radius: 13px;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+/* Nombre de la aplicación */
+
+body:has(.app-view) .dashboard-header h1 {
+    margin: 0;
+
+    font-size: clamp(23px, 6vw, 30px);
+    line-height: 1.15;
+}
+
+/* Mensaje de bienvenida */
+
+body:has(.app-view) .dashboard-header #welcomeMessage {
+    margin-top: 10px;
+
+    font-size: 14px;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================
+   BOTÓN DE PERFIL
+===================================== */
+
+#headerProfileButton {
+    display: none;
+
+    flex: 0 0 44px;
+
+    width: 44px;
+    height: 44px;
+
+    padding: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #e8f3ef;
+    color: #1f6f5c;
+
+    border: 1px solid #d7e8df;
+    border-radius: 50%;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+#headerProfileButton:hover {
+    background: #d9ebe3;
+}
+
+#headerProfileButton:focus-visible {
+    outline: 2px solid #1f6f5c;
+    outline-offset: 3px;
+}
+
+/* Mostrar avatar solamente en Inicio */
+
+body:has(#homeView:not([hidden])) #headerProfileButton {
+    display: flex;
+}
+
+
+/* Pantallas pequeñas */
+
+@media (max-width: 380px) {
+
+    body:has(.app-view) .dashboard-header {
+        gap: 8px;
+    }
+
+    body:has(.app-view) .dashboard-brand {
+        gap: 8px;
+    }
+
+    body:has(.app-view) .dashboard-header .brand-icon {
+        flex-basis: 34px;
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
+    }
+
+    #headerProfileButton {
+        flex-basis: 38px;
+        width: 38px;
+        height: 38px;
+    }
+
+}
+
+/* =====================================
+   SPENDWISE - ALINEACIÓN DEL ENCABEZADO
+===================================== */
+
+/* Contenedor de marca y bienvenida */
+
+body:has(.app-view) .dashboard-brand {
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
+
+    flex: 1;
+    min-width: 0;
+
+    gap: 0;
+}
+
+/* Fila del logotipo y nombre */
+
+body:has(.app-view) .dashboard-brand-row {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 44px;
+}
+
+/* Nombre de SpendWise */
+
+body:has(.app-view) .dashboard-brand-row h1 {
+    margin: 0;
+
+    line-height: 1.2;
+}
+
+/* Mensaje de bienvenida */
+
+body:has(.app-view) .dashboard-header #welcomeMessage {
+    margin: 10px 0 0;
+
+    line-height: 1.4;
+}
+
+/* Pantallas pequeñas */
+
+@media (max-width: 380px) {
+
+    body:has(.app-view) .dashboard-brand-row {
+        gap: 8px;
+    }
+
+}
+
+/* =====================================
+   SPENDWISE - IDENTIDAD VISUAL
+===================================== */
+
+/* Logotipo en inicio de sesión y registro */
+
+.login-container .brand-icon.brand-logo-image,
+.register-container .brand-icon.brand-logo-image {
+    display: block;
+    flex-shrink: 0;
+
+    object-fit: cover;
+
+    padding: 0;
+    border: none;
+    border-radius: 13px;
+
+    background: #f4f9f6;
+}
+
+/* =====================================
+   SPENDWISE - LOGOTIPO DEL DASHBOARD
+===================================== */
+
+body:has(.app-view) .dashboard-header .brand-icon.dashboard-logo-image {
+    display: block;
+
+    object-fit: contain;
+    object-position: center;
+
+    padding: 0;
+}
